@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 module.exports = {
   plugins: {
     tailwindcss: {},
-    autoprefixer: {},
-  },
+    autoprefixer: {}
+  }
 }
