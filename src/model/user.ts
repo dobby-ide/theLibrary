@@ -1,8 +1,15 @@
+import Book from './book'
+
+function uniqueID() {
+  return Math.floor(Math.random() * Date.now()).toString()
+}
+
 class User {
-  id: number = Math.floor(Math.random() * 100000)
+  id: string = uniqueID()
   firstName: string
   lastName: string
   email: string
+  booksBorrowed: Book[] = []
 
   constructor(firstName: string, lastName: string, email: string) {
     this.firstName = firstName

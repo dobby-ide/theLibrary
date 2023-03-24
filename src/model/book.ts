@@ -5,7 +5,7 @@ class Book {
   title: string
   description: string
   publisher: string
-  authors: [string]
+  authors: Array<string>
   status: string = 'Available'
   borrowerId?: number
   returnDate?: string
@@ -14,7 +14,7 @@ class Book {
     title: string,
     description: string,
     publisher: string,
-    authors: [string]
+    authors: Array<string>
   ) {
     this.ISBN = ISBN
     this.title = title

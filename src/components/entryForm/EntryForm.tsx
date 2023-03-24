@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { userLoginActions } from '../../store'
+import User from '../../model/user'
+import { userLoginActions, userActions, currentUserActions } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store'
 import classes from './EntryForm.module.scss'
@@ -10,6 +11,7 @@ const EntryForm = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const loggedIn = useSelector((state: RootState) => state.login.isLoggedIn)
+  const [okRegistration, setOkRegistration] = useState(false)
   const [name, setName] = useState()
   const [surname, setSurname] = useState()
   const [email, setEmail] = useState()
@@ -24,6 +26,17 @@ const EntryForm = () => {
   const emailInputChangeHandler = (e: { target: { value: any } }) => {
     setEmail(e.target.value)
   }
+  const registerNewUser = (event: any) => {
+    event.preventDefault()
+    if (user.Users.some((user) => user.email === email)) {
+      setOkRegistration(false)
+    } else {
+      dispatch(userActions.addUser(new User(name!, surname!, email!)))
+      setOkRegistration(true)
+      navigate('/')
+    }
+  }
+
   const signInHandler = (event: any) => {
     event.preventDefault()
 
@@ -35,7 +48,13 @@ const EntryForm = () => {
       ) {
         console.log('loggedin')
         dispatch(userLoginActions.loginAccepted())
-        navigate('/user')
+        dispatch(
+          currentUserActions.saveUser({
+            name: user.Users[iterator].firstName,
+            email: user.Users[iterator].email
+          })
+        )
+        navigate('/user', { state: user.Users[iterator].firstName })
         console.log(loggedIn)
       }
     }
@@ -62,11 +81,13 @@ const EntryForm = () => {
             <Link to="/user" className={classes.signInButton}>
               <button onClick={signInHandler}>Sign-in</button>
             </Link>
-            <button>Register</button>
+            <button onClick={registerNewUser}>Register</button>
           </div>
+          <div className="wasSuccessful">{okRegistration && <p>success</p>}</div>
         </form>
       </div>
     </>
   )
 }
+
 export default EntryForm

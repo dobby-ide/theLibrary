@@ -2,7 +2,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import RootLayout from './components/rootLayout/RootLayout'
-import UserPage from './pages/user/UserPage'
+
 
 import './App.css'
 
@@ -13,7 +13,7 @@ import User from './model/user'
 import HomePage from './pages/homepage/HomePage'
 import EntryForm from './components/entryForm/EntryForm'
 import AdminEntryForm from './pages/admin/AdminEntryForm'
-import AdminPage from './pages/admin/Adminpage'
+
 import RootAdminLayout from './components/rootLayout/RootAdminLayout'
 import AdminAuthors from './pages/admin/AdminAuthors'
 import AdminBooks from './pages/admin/AdminBooks'
@@ -22,6 +22,8 @@ import RootUserLayout from './components/rootLayout/RootUserLayout'
 import ReturnBook from './pages/returnBook/ReturnBook'
 import SearchBook from './pages/searchBook/SearchBook'
 import ProtectedU from './components/routes/ProtectUserRoute'
+import ErrorPage from './pages/mainNavigation/ErrorPage'
+import SearchBookDetail from './pages/searchBook/SearchBookDetail'
 
 function App() {
   const isAdminSignedIn = useSelector((state: RootState) => state.adminLogin.isLoggedIn)
@@ -31,10 +33,12 @@ function App() {
     {
       path: '/',
       element: <RootLayout />,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         { index: true, element: <HomePage /> },
         { path: '/userlogin', element: <EntryForm /> },
-        { path: '/adminlogin', element: <AdminEntryForm /> }
+        { path: '/adminlogin', element: <AdminEntryForm /> },
+        { path: '/browsebook', element: <SearchBook /> }
       ]
     },
     {
@@ -58,6 +62,14 @@ function App() {
           element: (
             <ProtectedU isSignedIn={isUserSignedIn}>
               <SearchBook />
+            </ProtectedU>
+          )
+        },
+        {
+          path: '/user/search/:bookID',
+          element: (
+            <ProtectedU isSignedIn={isUserSignedIn}>
+              <SearchBookDetail book={undefined} />
             </ProtectedU>
           )
         }
@@ -90,11 +102,14 @@ function App() {
       ]
     }
   ])
-  //const user = useSelector((state: RootState) => state.user)
+  const user = useSelector((state: RootState) => state.user)
+  const books = useSelector((state: RootState) => state.book)
   const dispatch = useDispatch()
   const addOneUser = () => {
     dispatch(userActions.addUser(new User('fabio', 'fabio', 'fabio')))
   }
+  console.log(user)
+  console.log(books)
   return (
     <div className="App">
       <RouterProvider router={router}></RouterProvider>
