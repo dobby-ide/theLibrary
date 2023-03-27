@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { RootState, bookActions, userActions } from '../../../store'
 import AddBookModal from './AddBookModal'
+import classes from '../styling/BookCard.module.scss'
 
 const BookCard: React.FC = ({ books }) => {
   const [bookIsbn, setBookIsbn] = useState()
@@ -23,48 +24,84 @@ const BookCard: React.FC = ({ books }) => {
     setOpenModal(true)
   }
   return (
-    <div>
-      <h1>List of all the books available</h1>
-      <div>
+    <section className={classes.bookCard_container}>
+      <div className={classes.renderedBooks}>
+        {openModal && (
+          <AddBookModal exitModal={exitModal} user={userId[0]} isbn={bookIsbn}></AddBookModal>
+        )}
         {books.map((book) => {
           return !userName ? (
-            <div key={book.ISBN}>
-              <Link to={`user/search/${book.ISBN}`}>
-                <div>{book.ISBN}</div>
-                <div>{book.title}</div>
-                <div>{book.description}</div>
-                <div>{book.publisher}</div>
-                <div>{book.status}</div>
-                <div>{book.returnDate}</div>
-                <div>{book.borrowerId}</div>
+            <div key={book.ISBN} className={classes.singleCard_container}>
+              <Link to={`./${book.ISBN}`} relative="path">
+                <div className={classes.bookTitle}>{book.title}</div>
+
+                <div className={classes.bookDescr}>Description: {book.description}</div>
+                <div className={classes.bookPublisher}>Publisher: {book.publisher}</div>
+                <div className={`${book.status} === "Available" && ${classes.bookStatusAvailable}`}>
+                  Status: {book.status}
+                </div>
+                {book.returnDate && (
+                  <div className={classes.bookReturnData}>Return day: {book.returnDate}</div>
+                )}
+
                 {book.authors.map((author) => {
-                  return <div key={author}>{author}</div>
+                  return (
+                    <div className={classes.bookAuthors} key={author}>
+                      Author: {author}
+                    </div>
+                  )
                 })}
+                <div className={classes.bookIsbn}>ISBN: {book.ISBN}</div>
+                <div className={classes.imageContainer}>
+                  <img className={classes.image} src={book.imageUrl}></img>
+                </div>
               </Link>
             </div>
           ) : (
-            <div key={book.ISBN} id={book.ISBN}>
+            <div className={classes.singleCard_container} key={book.ISBN} id={book.ISBN}>
               {book.status === 'Available' && (
-                <button onClick={borrowingBookHandler}>borrow</button>
+                <button className={classes.borrowingBook_button} onClick={borrowingBookHandler}>
+                  borrow
+                </button>
               )}
-              {openModal && (
-                <AddBookModal exitModal={exitModal} user={userId[0]} isbn={bookIsbn}></AddBookModal>
-              )}
-              <div>{book.ISBN}</div>
-              <div>{book.title}</div>
-              <div>{book.description}</div>
-              <div>{book.publisher}</div>
-              <div>{book.status}</div>
-              <div>{book.returnDate}</div>
-              <div>{book.borrowerId}</div>
-              {book.authors.map((author) => {
-                return <div key={author}>{author}</div>
-              })}
+
+              <Link to={`./${book.ISBN}`} relative="path">
+                <div className={classes.bookTitle}>
+                  <p>{book.title}</p>
+                </div>
+
+                <div className={classes.bookDescr}>
+                  Description: <p>{book.description}</p>
+                </div>
+                <div className={classes.bookPublisher}>
+                  Publisher: <p>{book.publisher}</p>
+                </div>
+                <div className={`${book.status} === "Available" && ${classes.bookStatusAvailable}`}>
+                  Status: <p>{book.status}</p>
+                </div>
+                {book.returnDate && (
+                  <div className={classes.bookReturnDate}>Return day: {book.returnDate}</div>
+                )}
+
+                {book.authors.map((author) => {
+                  return (
+                    <div className={classes.bookAuthors} key={author}>
+                      {author}
+                    </div>
+                  )
+                })}
+                <div className={classes.bookIsbn}>
+                  ISBN: <p>{book.ISBN}</p>
+                </div>
+                <div className={classes.imageContainer}>
+                  <img className={classes.image} src={book.imageUrl}></img>
+                </div>
+              </Link>
             </div>
           )
         })}
       </div>
-    </div>
+    </section>
   )
 }
 export default BookCard

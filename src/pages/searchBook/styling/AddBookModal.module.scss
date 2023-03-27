@@ -1,0 +1,25 @@
+.addBookModal{
+	text-align: center;
+	display:flex;flex-direction: column;
+	position:absolute;
+	align-items: center;
+	justify-content: center;
+	background:linear-gradient(to right, rgba(rgb(221, 221, 221),.2),rgba(rgb(168, 166, 171),.9),rgba(rgb(221, 221, 221),.2));
+	width:100%;
+	height:100%;
+	top:-5px;
+	left:0px;
+	z-index:100;
+}
+.modalButton{
+
+}
+.text{
+
+	background-color: rgb(186, 186, 186);
+	color:white;
+}
+.button{
+	width:20%;
+	height:20%
+}

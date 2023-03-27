@@ -1,0 +1,54 @@
+
+.header_main{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+
+	color:rgb(255, 255, 255);
+
+	background-color: rgb(255, 255, 255);
+
+}
+.comboLogoText{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.imageContainer{
+
+	border:1px solid #6C63FF;
+	margin:1rem;
+	width:80px;
+	height:80px;
+	border-radius: 100%;
+	overflow: hidden;
+}
+.logo{
+	padding-left: 10px;;
+	width:110px;
+	height:80px;
+  &text{
+	display:flex;
+	margin-left:-1rem;
+	font-size: 2rem;
+	color:#6C63FF;
+	& p{
+		font-size: .5rem;
+	}
+  }
+}
+.nav ul{
+	color:#6C63FF;
+	display:flex;
+	align-items: center;
+	justify-content:space-around;
+}
+li a {
+	margin:1rem;
+	text-transform: uppercase;
+	color:#0c05a2
+
+}
+span{
+		font-size: .7rem;
+	}

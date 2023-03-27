@@ -1,5 +1,5 @@
 class Author {
-  name: string
+  name: String
   constructor(name: string) {
     this.name = name
   }

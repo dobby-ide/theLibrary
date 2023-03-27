@@ -3,19 +3,16 @@
   margin:0;
 }
 .App{
-  margin:0;
+  background-color: rgb(235, 235, 235);
+  position:absolute;
+  width:75vw;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
   height:100vh;
 }
-
-
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 .card {
   padding: 2em;
 }
+
 

@@ -1,9 +1,8 @@
-import React from 'react'
-import { RootState } from '../../store'
 import { adminLoginActions } from '../../store'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import classes from '../admin/styling/AdminEntryForm.module.scss'
 
 const AdminEntryForm = () => {
   const navigate = useNavigate()
@@ -22,15 +21,22 @@ const AdminEntryForm = () => {
   }
   return (
     <>
-      <div className="form">
-        <form>
-          <div>
-            <label>id</label>
-            <input type="text" onChange={idHandler}></input>
+      <div className={classes.adminFormContainer}>
+        <form className={classes.adminForm}>
+          <div className={classes.inputContainer}>
+            <input
+              type="text"
+              className={classes.input}
+              onChange={idHandler}
+              placeholder="admin ID:"></input>
+            <label id="lab" className={classes.label}>
+              admin ID:
+            </label>
           </div>
-          <div>
-            <button onClick={signInHandler}>Sign-in</button>
-            <button>Register</button>
+          <div className={classes.buttonsContainer}>
+            <button className={classes.signinButton} onClick={signInHandler}>
+              Sign-in
+            </button>
           </div>
         </form>
       </div>

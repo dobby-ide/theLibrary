@@ -1,19 +1,13 @@
-/* eslint-disable prettier/prettier */
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import RootLayout from './components/rootLayout/RootLayout'
-
-
+import { singInWithGoogle } from './firebase_setup/firebase'
 import './App.css'
-
 import { RootState, userActions } from './store'
-
 import User from './model/user'
-
 import HomePage from './pages/homepage/HomePage'
 import EntryForm from './components/entryForm/EntryForm'
 import AdminEntryForm from './pages/admin/AdminEntryForm'
-
 import RootAdminLayout from './components/rootLayout/RootAdminLayout'
 import AdminAuthors from './pages/admin/AdminAuthors'
 import AdminBooks from './pages/admin/AdminBooks'
@@ -24,8 +18,10 @@ import SearchBook from './pages/searchBook/SearchBook'
 import ProtectedU from './components/routes/ProtectUserRoute'
 import ErrorPage from './pages/mainNavigation/ErrorPage'
 import SearchBookDetail from './pages/searchBook/SearchBookDetail'
+import UserPage from './pages/user/UserPage'
 
 function App() {
+  const books = useSelector((state: RootState) => state.book.Books)
   const isAdminSignedIn = useSelector((state: RootState) => state.adminLogin.isLoggedIn)
   const isUserSignedIn = true
   console.log(isAdminSignedIn)
@@ -36,13 +32,17 @@ function App() {
       errorElement: <ErrorPage></ErrorPage>,
       children: [
         { index: true, element: <HomePage /> },
-        { path: '/userlogin', element: <EntryForm /> },
-        { path: '/adminlogin', element: <AdminEntryForm /> },
-        { path: '/browsebook', element: <SearchBook /> }
+        { path: 'userlogin', element: <EntryForm /> },
+        { path: 'adminlogin', element: <AdminEntryForm /> },
+        {
+          path: 'browsebook',
+          element: <SearchBook />
+        },
+        { path: 'browsebook/:bookID', element: <SearchBookDetail book={books} /> }
       ]
     },
     {
-      path: '/user',
+      path: 'user',
       element: (
         <ProtectedU isSignedIn={isUserSignedIn}>
           <RootUserLayout />
@@ -50,7 +50,15 @@ function App() {
       ),
       children: [
         {
-          path: '/user/return',
+          index: true,
+          element: (
+            <ProtectedU isSignedIn={isUserSignedIn}>
+              <UserPage />
+            </ProtectedU>
+          )
+        },
+        {
+          path: 'return',
           element: (
             <ProtectedU isSignedIn={isUserSignedIn}>
               <ReturnBook />
@@ -58,7 +66,7 @@ function App() {
           )
         },
         {
-          path: '/user/search',
+          path: 'search',
           element: (
             <ProtectedU isSignedIn={isUserSignedIn}>
               <SearchBook />
@@ -66,10 +74,10 @@ function App() {
           )
         },
         {
-          path: '/user/search/:bookID',
+          path: 'search/:bookID',
           element: (
             <ProtectedU isSignedIn={isUserSignedIn}>
-              <SearchBookDetail book={undefined} />
+              <SearchBookDetail book={books} />
             </ProtectedU>
           )
         }
@@ -103,7 +111,6 @@ function App() {
     }
   ])
   const user = useSelector((state: RootState) => state.user)
-  const books = useSelector((state: RootState) => state.book)
   const dispatch = useDispatch()
   const addOneUser = () => {
     dispatch(userActions.addUser(new User('fabio', 'fabio', 'fabio')))

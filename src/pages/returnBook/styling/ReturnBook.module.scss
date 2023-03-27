@@ -1,0 +1,36 @@
+.returnBookContainer{
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+}
+.bookToReturnContainer{
+	margin:2rem;
+
+}
+.bookToReturn{
+	border-bottom: 1px solid black;
+	display:flex;
+	gap:10px;
+	align-items: center;
+	&Isbn{
+		font-size: .7rem;
+	}
+	&Title{
+		color:rgb(147, 147, 147);
+		font-size: 1.5rem;
+		&::before{
+			content:'"';
+			color:rgb(0, 0, 0);
+		}
+		&::after{
+			content:'"';
+			color:rgb(0, 0, 0);
+		}
+	}
+	&Button{
+
+	}
+	&Dueday{
+		color:rebeccapurple;
+	}
+}

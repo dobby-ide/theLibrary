@@ -60,24 +60,36 @@ const EntryForm = () => {
     }
     //CREATES LOGIC TO CHECK IF name surname and email are inside the user
   }
-  console.log(loggedIn)
+
   return (
     <>
-      <div className="form">
-        <form>
-          <div>
-            <label>name</label>
-            <input type="text" onChange={nameInputChangeHandler}></input>
+      <div className={classes.userFormContainer}>
+        <form className={classes.userForm}>
+          <div className={classes.inputContainer}>
+            <input
+              placeholder="name"
+              className={classes.input}
+              type="text"
+              onChange={nameInputChangeHandler}></input>
+            <label className={classes.labelName}>name</label>
           </div>
           <div>
-            <label>surname</label>
-            <input type="text" onChange={surnameInputChangeHandler}></input>
+            <input
+              placeholder="surname"
+              className={classes.input}
+              type="text"
+              onChange={surnameInputChangeHandler}></input>
+            <label className={classes.labelSurname}>surname</label>
           </div>
           <div>
-            <label>email</label>
-            <input type="text" onChange={emailInputChangeHandler}></input>
+            <input
+              placeholder="e-mail"
+              className={classes.input}
+              type="text"
+              onChange={emailInputChangeHandler}></input>
+            <label className={classes.labelEmail}>e-mail</label>
           </div>
-          <div>
+          <div className={classes.buttonContainer}>
             <Link to="/user" className={classes.signInButton}>
               <button onClick={signInHandler}>Sign-in</button>
             </Link>

@@ -71,7 +71,17 @@ const booksSlice = createSlice({
       ).toLocaleDateString()
       state.Books = newState
     },
-    returnBook() {},
+    returnBook(state, action) {
+      const index = state.Books.findIndex((obj) => String(obj.ISBN) === String(action.payload.isbn))
+      console.log(index)
+      // let newState = [...state.Books]
+      // newState[index].status = 'Available'
+      // newState[index].returnDate = ''
+      // console.log(newState[index])
+      state.Books[index].status = 'Available'
+      state.Books[index].returnDate = ''
+      console.log(state.Books[index])
+    },
     updateBookInfo(state, action) {
       const index = state.Books.findIndex((obj) => String(obj.ISBN) === action.payload.isbn)
 
@@ -110,23 +120,28 @@ const userSlice = createSlice({
       state.Users = [...state.Users, action.payload]
     },
     cart(state, action) {
-      console.log(action.payload)
-      const newState = [...state.Users]
+      const newState = state.Users
+
       let index = state.Users.findIndex((user) => String(user.id) === action.payload.userId.id)
+      console.log(newState[index])
+      let finalObj = {}
       const t = action.payload.book //[{}]
-      newState[index].booksBorrowed.push(t)
+      for (let i = 0; i < t.length; i++) {
+        Object.assign(finalObj, t[i])
+      }
+      newState[index].booksBorrowed.push(finalObj)
       state.Users = newState
     },
     returnBook(state, action) {
       const userEmail = action.payload.user
       const index = state.Users.findIndex((user) => String(user.email) === userEmail)
-      const newState = [...state.Users]
+      const newState = state.Users
       const returnBookIsbn = action.payload.isbn
-      const arrayOfBooks = newState[index].booksBorrowed.findIndex(
-        (x) => String(x.ISBN) === returnBookIsbn
+      let bookIndex = newState[index].booksBorrowed.findIndex(
+        (bookIndex) => String(bookIndex.ISBN) === returnBookIsbn
       )
-      newState[index].booksBorrowed.splice(arrayOfBooks)
-      state.Users = newState
+      newState[index].booksBorrowed.splice(bookIndex, 1)
+      console.log(newState[index].booksBorrowed)
     }
   }
 })

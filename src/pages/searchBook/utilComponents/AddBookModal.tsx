@@ -1,6 +1,7 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { bookActions, RootState, userActions } from '../../../store'
+import classes from '../styling/AddBookModal.module.scss'
+
 const AddBookModal = ({ isbn, user, exitModal }) => {
   const auser = useSelector((state: RootState) => state.user.Users)
   const dispatch = useDispatch()
@@ -13,12 +14,24 @@ const AddBookModal = ({ isbn, user, exitModal }) => {
     dispatch(userActions.cart({ userId: user, book: borrowedBook }))
     exitModal()
   }
+  const exit = () => {
+    exitModal()
+  }
   console.log(user)
   console.log(borrowedBook)
   return (
-    <div>
-      <h2>inside ADD a BOOK MODAL</h2>
-      <button onClick={confirmBook}>confirm</button>
+    <div className={classes.addBookModal}>
+      <div className={classes.text}>
+        <p>confirm your selection</p>
+      </div>
+      <div className={classes.button}>
+        <button className={classes.modalButton} onClick={confirmBook}>
+          confirm
+        </button>
+        <button className={classes.modalButton} onClick={exit}>
+          cancel
+        </button>
+      </div>
     </div>
   )
 }

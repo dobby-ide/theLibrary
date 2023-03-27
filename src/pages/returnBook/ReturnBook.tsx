@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import ReturnBookModal from '../searchBook/utilComponents/ReturnBookModal'
+import classes from './styling/ReturnBook.module.scss'
 const ReturnBook = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [isbn, setIsbn] = useState()
@@ -9,31 +10,30 @@ const ReturnBook = () => {
   const fullUser = useSelector((state: RootState) =>
     state.user.Users.filter((user) => String(user.email) === currentUser)
   )
-  const finalBooks = []
-  for (let i in fullUser[0].booksBorrowed) {
-    const t = fullUser[0].booksBorrowed[i]
-    for (let j in t) {
-      finalBooks.push(t[j])
-    }
-  }
-  console.log(fullUser)
+  const books = useSelector((state: RootState) => state.book.Books)
   const onReturnBookHandler = (e) => {
     setIsbn(e.target.parentElement.id)
+    console.log(e.target.parentElement.id)
     setModalOpen(true)
   }
   const exitModal = () => {
     setModalOpen(false)
   }
+  console.log('books in returnBook:', books)
+
+  console.log(fullUser)
   return (
-    <div>
-      <h1>I am return book</h1>
-      <div>
-        {fullUser[0].booksBorrowed.length > 0 ? (
-          finalBooks.map((book) => (
-            <div id={book.ISBN}>
-              <div>{book.ISBN}</div>
-              <div>{book.title}</div>
-              <button onClick={onReturnBookHandler}>return book</button>
+    <div className={classes.returnBookContainer}>
+      <div className={classes.bookToReturnContainer}>
+        {fullUser[0].booksBorrowed ? (
+          fullUser[0].booksBorrowed.map((book) => (
+            <div className={classes.bookToReturn} id={book.ISBN} key={book.ISBN}>
+              <div className={classes.bookToReturnIsbn}>{book.ISBN}</div>
+              <div className={classes.bookToReturnTitle}>{book.title}</div>
+              <button className={classes.bookToReturnButton} onClick={onReturnBookHandler}>
+                return book
+              </button>
+              <div className={classes.bookToReturnDueday}>{book.returnDate}</div>
             </div>
           ))
         ) : (

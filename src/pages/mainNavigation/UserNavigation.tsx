@@ -2,6 +2,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { userLoginActions, currentUserActions } from '../../store'
 import { Link } from 'react-router-dom'
+import classes from './styling/UserNavigation.module.scss'
+import logo from '../../assets/images/svg_bookshelf.svg'
 
 const UserNavigation = () => {
   const location = useLocation()
@@ -9,14 +11,27 @@ const UserNavigation = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const backToMainPage = () => {
+    //to fix issue with login still valid
     dispatch(currentUserActions.logout())
     dispatch(userLoginActions.loginAccepted())
-    navigate('/')
+    navigate('/userlogin')
   }
   return (
-    <header className="px-4 py-2 bg-blue-100">
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+    <header className={classes.header_main}>
+      <div className={classes.comboLogoText}>
+        <div className={classes.imageContainer}>
+          <img className={classes.logo} src={logo}></img>
+        </div>
+        <div className={classes.logotext}>
+          <h3>|IALI|</h3>
+          <div className={classes.logoSubText}>
+            <p>Integrify</p>
+            <p>Academy</p> <p>LIbrary</p>
+          </div>
+        </div>
+      </div>
+      <nav className={classes.nav}>
+        <ul>
           <li>
             <button onClick={backToMainPage}>LogOut {user}</button>
           </li>

@@ -1,20 +1,46 @@
-import { useState } from 'react'
-import EntryForm from '../../components/entryForm/EntryForm'
+import logo from '../../assets/images/svg_bookshelf.svg'
+import classes from './styling/MainNavigation.module.scss'
 import { Link } from 'react-router-dom'
+import { signInWithGoogle } from '../../firebase_setup/firebase'
 const MainNavigation = () => {
-  const [login, setLogin] = useState(false)
+  const authenticate = async () => {
+    const google = await signInWithGoogle().then((result) => result.user.displayName)
+    console.log(google)
+  }
+
   return (
-    <header className="px-4 py-2 bg-blue-100">
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+    <header className={classes.header_main}>
+      <div className={classes.comboLogoText}>
+        <div className={classes.imageContainer}>
+          <img className={classes.logo} src={logo}></img>
+        </div>
+        <div className={classes.logotext}>
+          <h3>|IALI|</h3>
+          <div className={classes.logoSubText}>
+            <p>Integrify</p>
+            <p>Academy</p> <p>LIbrary</p>
+          </div>
+        </div>
+      </div>
+      <nav className={classes.nav}>
+        <ul className={classes.ul}>
           <li>
-            <Link to="/adminlogin">admin login</Link>
+            <Link to="/adminlogin">
+              admin <span>login</span>
+            </Link>
           </li>
           <li>
-            <Link to="/userlogin">user login</Link>
+            <Link to="/userlogin">
+              user <span>login</span>
+            </Link>
           </li>
           <li>
             <Link to="/browsebook">browse books</Link>
+          </li>
+          <li>
+            <Link to="/browsebook">
+              <button onClick={authenticate}>SIGN IN WITH GOOGLE</button>
+            </Link>
           </li>
         </ul>
       </nav>
