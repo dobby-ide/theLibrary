@@ -1,0 +1,17 @@
+.input{
+      box-shadow: 0 1rem 3rem rgba(black,.5);
+	font-size:1.5rem;
+    padding: 1.5rem 2rem;
+    border-radius:2px;
+    background-color: yellowgreen;
+    border:none;
+     border-bottom: 3px solid ;
+     width:90%;
+     display:block;
+
+}
+.input:focus{
+	outline: none;
+      box-shadow: 0 1rem 2rem rgba(rgb(240, 240, 240),.2);
+      border-bottom: 3px solid rgba(rgb(56, 235, 1),.8);
+}

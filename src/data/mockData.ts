@@ -8,7 +8,7 @@ export const books = [
     'The alarm before 7am',
     'a story of an everyday life',
     'TRECCANI',
-    ['PierPaolo Pasolini', 'Frank Johnson'],
+    [new Author('Matteo Renga'), new Author('Matieu Matieauius')],
     'real-life'
   ),
   new Book(
@@ -16,7 +16,7 @@ export const books = [
     'The alarm before 8am',
     'a story of an everyday life 2',
     'Tregatti',
-    ['Matieu Matieauius'],
+    [new Author('Matteo Renga'), new Author('Matieu Matieauius')],
     'real-life'
   ),
   new Book(
@@ -24,7 +24,7 @@ export const books = [
     'The alarm before 9am',
     'a story of an everyday life3',
     'Marzian',
-    ['Boris Biros'],
+    [new Author('Matieu Matieauius')],
     'real-life'
   ),
   new Book(
@@ -32,7 +32,7 @@ export const books = [
     'The alarm before 10am',
     'a story of an everyday life4',
     'merrer',
-    ['Daniel Trevisan'],
+    [new Author('Matteo Renga')],
     'real-life'
   ),
   new Book(
@@ -40,7 +40,7 @@ export const books = [
     'That was a false alarm',
     'A compilation of common mistakes that makes the compiler angry',
     'Oracle',
-    ['Daniel Trevisan', 'Matieu Matieauius'],
+    [new Author('William Rebus'), new Author('Maio Caio')],
     'computer science'
   ),
   new Book(
@@ -48,16 +48,23 @@ export const books = [
     'Beethoven',
     'All about Beethoven, since his early childhood',
     'Tregatti',
-    ['Matteo', 'Matieu Matieauius'],
+    [new Author('Matteo Renga'), new Author('Boris')],
     'bio'
   ),
-  new Book(23462, 'L.Torvalds', 'To Linux 4.0', 'Treccani', ['Matteo', 'Matieu Matieauius'], 'bio'),
+  new Book(
+    23462,
+    'L.Torvalds',
+    'To Linux 4.0',
+    'Treccani',
+    [new Author('Maio Caio'), new Author('Mark Max')],
+    'bio'
+  ),
   new Book(
     23463,
     'Football in practice',
     'dedicated schema and analysis',
     'Treccani',
-    ['Matteo', 'Matieu Matieauius'],
+    [new Author('Matteo Renga'), new Author('Matieu Matieauius')],
     'sport'
   ),
   new Book(
@@ -65,17 +72,20 @@ export const books = [
     'Magic creatures in the deep space',
     'a fantastic story',
     'Treccani',
-    ['Matteo', 'Matieu Matieauius'],
+    [new Author('Matteo Renga')],
     'fantasy'
   )
 ]
 
 export const Authors = [
-  new Author('PierPaolo Pasolini'),
-  new Author('Frank Johnson'),
+  new Author('Matteo Renga'),
+  new Author('Francesco Trevisani'),
   new Author('Matieu Matieauius'),
-  new Author('Boris Biros'),
-  new Author('Daniel Trevisan')
+  new Author('Boris'),
+  new Author('William Rebus'),
+  new Author('Matthew Bond'),
+  new Author('Mark Max'),
+  new Author('Maio Caio')
 ]
 
 export const Users = [

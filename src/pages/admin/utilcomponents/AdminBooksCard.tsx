@@ -33,7 +33,9 @@ const AdminBookCard = ({
       <div>{title}</div>
       <div>{description}</div>
       <div>{publisher}</div>
-      <div>{authors}</div>
+      {authors.map((author) => (
+        <div>{author.name}</div>
+      ))}
       <div>{status}</div>
       <div>{borrowerId}</div>
       <div>{returnDate}</div>

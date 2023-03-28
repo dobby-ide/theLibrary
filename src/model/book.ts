@@ -4,26 +4,26 @@ import rllogo from '../assets/images/rllogo.svg'
 import biologo from '../assets/images/biologo.svg'
 import falogo from '../assets/images/falogo.svg'
 import splogo from '../assets/images/splogo.svg'
-let Category: 'fantasy' | 'bio' | 'sport' | 'real-life' | 'computer science'
+export type Category = 'fantasy' | 'bio' | 'sport' | 'real-life' | 'computer science'
 
 class Book {
   ISBN: number
   title: string
   description: string
   publisher: string
-  authors: typeof Author
+  authors: Author[] | Author
   status: string = 'Available'
   borrowerId?: number
   returnDate?: string
-  category: typeof Category
+  category: Category
   imageUrl?: string
   constructor(
     ISBN: number,
     title: string,
     description: string,
     publisher: string,
-    authors: typeof Author,
-    category: typeof Category
+    authors: Author[],
+    category: Category
   ) {
     this.ISBN = ISBN
     this.title = title

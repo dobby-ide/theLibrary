@@ -1,0 +1,13 @@
+.footerContainer{
+	width:75vw;
+	height:4rem;
+	background-color: rgb(116, 116, 116);
+	position:absolute;
+	bottom:0
+}
+.navigation{
+	display: flex;
+	gap:3rem;
+	justify-content: center;
+	align-items: center;
+}

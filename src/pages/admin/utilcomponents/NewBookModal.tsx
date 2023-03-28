@@ -1,8 +1,10 @@
-import React, { useReducer } from 'react'
+import { useReducer } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { bookActions } from '../../../store'
 import Book from '../../../model/book'
 import classes from './NewBookModal.module.scss'
+
 const initialInputState = {
   title: '',
   description: '',
@@ -10,6 +12,7 @@ const initialInputState = {
   publisher: '',
   authors: ''
 }
+
 const inputStateReducer = (state, action) => {
   if (action.type === 'HANDLE_INPUT') {
     return {
@@ -19,10 +22,11 @@ const inputStateReducer = (state, action) => {
   }
   return initialInputState
 }
+
 const NewBookModal = ({ closeModal }) => {
   const dispatch = useDispatch()
-
   const [inputState, inputDispatch] = useReducer(inputStateReducer, initialInputState)
+
   const textChangeHandler = (e) => {
     inputDispatch({
       type: 'HANDLE_INPUT',
@@ -30,6 +34,7 @@ const NewBookModal = ({ closeModal }) => {
       payload: e.target.value
     })
   }
+
   const onSubmitNewBookHandler = () => {
     const authors = inputState.authors.split(',')
     dispatch(
@@ -44,6 +49,7 @@ const NewBookModal = ({ closeModal }) => {
       )
     )
   }
+
   const closingModalHandler = (e) => {
     e.preventDefault()
     closeModal()

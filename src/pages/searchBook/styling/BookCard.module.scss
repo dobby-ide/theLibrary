@@ -1,9 +1,14 @@
 .bookCard_container{
 	position:absolute;
-	width:66vw;
+	width:75vw;
 	left:50%;
-
 	transform:translateX(-50%);
+	&_header{
+		height:6rem;
+		width:75vw;
+		display:flex;
+		background-color: yellowgreen;
+	}
 }
 .renderedBooks{
 	padding:1rem;

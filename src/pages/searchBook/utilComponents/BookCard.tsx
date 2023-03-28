@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom'
 import { RootState, bookActions, userActions } from '../../../store'
 import AddBookModal from './AddBookModal'
 import classes from '../styling/BookCard.module.scss'
+import Search from './Search'
+import Filter from './Filter'
 
 const BookCard: React.FC = ({ books }) => {
+  const [result, setResult] = useState([])
   const [bookIsbn, setBookIsbn] = useState()
   const [openModal, setOpenModal] = useState(false)
   const dispatch = useDispatch()
@@ -23,13 +26,23 @@ const BookCard: React.FC = ({ books }) => {
     setBookIsbn(isbn)
     setOpenModal(true)
   }
+  const onSearchingInputs = (inputByUser) => {
+    setResult(inputByUser)
+  }
+  const onCategorySelectHandler = (result) => {
+    result.length > 0 && setResult(result)
+  }
   return (
     <section className={classes.bookCard_container}>
+      <header className={classes.bookCard_container_header}>
+        <Search books={books} back={onSearchingInputs} />
+        <Filter results={onCategorySelectHandler} books={books}></Filter>
+      </header>
       <div className={classes.renderedBooks}>
         {openModal && (
           <AddBookModal exitModal={exitModal} user={userId[0]} isbn={bookIsbn}></AddBookModal>
         )}
-        {books.map((book) => {
+        {result.map((book) => {
           return !userName ? (
             <div key={book.ISBN} className={classes.singleCard_container}>
               <Link to={`./${book.ISBN}`} relative="path">
@@ -46,8 +59,8 @@ const BookCard: React.FC = ({ books }) => {
 
                 {book.authors.map((author) => {
                   return (
-                    <div className={classes.bookAuthors} key={author}>
-                      Author: {author}
+                    <div className={classes.bookAuthors} key={author.name}>
+                      Author: {author.name}
                     </div>
                   )
                 })}
@@ -85,8 +98,8 @@ const BookCard: React.FC = ({ books }) => {
 
                 {book.authors.map((author) => {
                   return (
-                    <div className={classes.bookAuthors} key={author}>
-                      {author}
+                    <div className={classes.bookAuthors} key={author.name}>
+                      {author.name}
                     </div>
                   )
                 })}
