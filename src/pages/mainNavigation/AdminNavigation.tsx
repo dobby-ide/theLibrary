@@ -1,17 +1,19 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+
 import { adminLoginActions } from '../../store'
-import { Link } from 'react-router-dom'
 import classes from './styling/AdminNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
 const AdminNavigation = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const backToMainPage = () => {
     dispatch(adminLoginActions.loginAccepted())
     navigate('/')
   }
+
   return (
     <header className={classes.header_main}>
       <div className={classes.comboLogoText}>

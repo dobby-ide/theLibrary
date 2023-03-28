@@ -1,7 +1,8 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { userLoginActions, currentUserActions } from '../../store'
 import { Link } from 'react-router-dom'
+
+import { userLoginActions, currentUserActions } from '../../store'
 import classes from './styling/UserNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
@@ -10,6 +11,7 @@ const UserNavigation = () => {
   let user = location.state
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const backToMainPage = () => {
     //to fix issue with login still valid
     dispatch(currentUserActions.logout())

@@ -1,16 +1,16 @@
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
 import { RootState } from '../../store'
 import classes from './styling/UserPage.module.scss'
 //TODO: create some history for the user
 
 const UserPage = () => {
-  const routerParams = useParams()
   const user = useSelector((state: RootState) => state.currentUser.currentUserEmail)
   const fullUser = useSelector((state: RootState) =>
     state.user.Users.filter((currUser) => String(currUser.email) === user)
   )
-  console.log(fullUser[0].booksBorrowed)
+
   return (
     <div className={classes.userPageContainer}>
       <h2>Welcome {user}</h2>

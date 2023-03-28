@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+
 import User from '../../model/user'
 import { userLoginActions, userActions, currentUserActions } from '../../store'
-import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store'
 import classes from './EntryForm.module.scss'
-import { Link, useNavigate } from 'react-router-dom'
+
 //to implement: logic to enable/disable the buttons
 const EntryForm = () => {
   const navigate = useNavigate()
@@ -20,12 +22,15 @@ const EntryForm = () => {
   const nameInputChangeHandler = (e: { target: { value: any } }) => {
     setName(e.target.value)
   }
+
   const surnameInputChangeHandler = (e: { target: { value: any } }) => {
     setSurname(e.target.value)
   }
+
   const emailInputChangeHandler = (e: { target: { value: any } }) => {
     setEmail(e.target.value)
   }
+
   const registerNewUser = (event: any) => {
     event.preventDefault()
     if (user.Users.some((user) => user.email === email)) {

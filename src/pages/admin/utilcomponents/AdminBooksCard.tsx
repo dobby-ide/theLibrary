@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { bookActions } from '../../../store'
 import UpdateBookModal from './UpdateBookModal'
 
@@ -16,17 +17,21 @@ const AdminBookCard = ({
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [chosenBook, setChosenBook] = useState()
   const dispatch = useDispatch()
+
   const onClosingModalHandler = () => {
     setModalIsVisible(false)
   }
+
   const onUpdateBookHandler = (e) => {
     setModalIsVisible(true)
     setChosenBook(e.target.parentElement.id)
   }
+
   const onDeleteBookHandler = (e) => {
     console.log(e.target.parentElement.id)
     dispatch(bookActions.removeBook(e.target.parentElement.id))
   }
+
   return (
     <div key={isbn} id={isbn}>
       <div>{isbn}</div>

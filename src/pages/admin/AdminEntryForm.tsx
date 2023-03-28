@@ -1,16 +1,19 @@
-import { adminLoginActions } from '../../store'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+
+import { adminLoginActions } from '../../store'
 import classes from '../admin/styling/AdminEntryForm.module.scss'
 
 const AdminEntryForm = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [id, setId] = useState()
+
   const idHandler = (e: { target: { value: any } }) => {
     setId(e.target.value)
   }
+
   const signInHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     if (id === '112233') {
@@ -19,6 +22,7 @@ const AdminEntryForm = () => {
     } else {
     }
   }
+
   return (
     <>
       <div className={classes.adminFormContainer}>

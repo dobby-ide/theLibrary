@@ -1,5 +1,5 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
+
 import Footer from '../../pages/footer/Footer'
 import UserNavigation from '../../pages/mainNavigation/UserNavigation'
 

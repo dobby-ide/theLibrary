@@ -1,19 +1,21 @@
-import logo from '../../assets/images/svg_bookshelf.svg'
-import classes from './styling/MainNavigation.module.scss'
-import { Link } from 'react-router-dom'
-import { userActions } from '../../store'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+
+import { userActions } from '../../store'
 import User from '../../model/user'
 import { userLoginActions } from '../../store'
 import { currentUserActions } from '../../store'
 import { signInWithGoogle } from '../../firebase_setup/firebase'
+import classes from './styling/MainNavigation.module.scss'
+import logo from '../../assets/images/svg_bookshelf.svg'
+
 const MainNavigation = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const authenticate = async () => {
     const google = await signInWithGoogle().then((result) => result.user)
-    console.log(google)
+
     dispatch(userActions.addUser(new User(google.displayName!, google.displayName!, google.email!)))
     dispatch(userLoginActions.loginAccepted())
     dispatch(

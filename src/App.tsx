@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import RootLayout from './components/rootLayout/RootLayout'
+
 import { singInWithGoogle } from './firebase_setup/firebase'
 import './App.css'
 import { RootState, userActions } from './store'
@@ -19,12 +19,19 @@ import ProtectedU from './components/routes/ProtectUserRoute'
 import ErrorPage from './pages/mainNavigation/ErrorPage'
 import SearchBookDetail from './pages/searchBook/SearchBookDetail'
 import UserPage from './pages/user/UserPage'
+import RootLayout from './components/rootLayout/RootLayout'
 
 function App() {
+  const dispatch = useDispatch()
   const books = useSelector((state: RootState) => state.book.Books)
   const isAdminSignedIn = useSelector((state: RootState) => state.adminLogin.isLoggedIn)
   const isUserSignedIn = true
-  console.log(isAdminSignedIn)
+  const user = useSelector((state: RootState) => state.user)
+
+  const addOneUser = () => {
+    dispatch(userActions.addUser(new User('fabio', 'fabio', 'fabio')))
+  }
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -110,13 +117,7 @@ function App() {
       ]
     }
   ])
-  const user = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch()
-  const addOneUser = () => {
-    dispatch(userActions.addUser(new User('fabio', 'fabio', 'fabio')))
-  }
-  console.log(user)
-  console.log(books)
+
   return (
     <div className="App">
       <RouterProvider router={router}></RouterProvider>

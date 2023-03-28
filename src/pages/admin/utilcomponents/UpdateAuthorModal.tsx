@@ -1,25 +1,30 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { authorActions, RootState } from '../../../store'
 
-import { useDispatch, useSelector } from 'react-redux'
 const UpdateAuthorModal: React.FC = ({ exit, name }) => {
+
   const [authorName, setAuthorName] = useState('')
   const dispatch = useDispatch()
   const author = useSelector((state: RootState) =>
     state.author.Authors.filter((author) => String(author.name) === name)
   )
   const authors = useSelector((state: RootState) => state.author.Authors)
+
   const exitModal = () => {
     exit()
   }
+
   const textChangeHandler = (e) => {
     setAuthorName(e.target.value)
   }
+
   const onUpdateAuthorHandler = () => {
     dispatch(authorActions.updateAuthor({ name: authorName, index: name }))
     exit()
   }
-  console.log(authors)
+
   return (
     <div>
       <div>

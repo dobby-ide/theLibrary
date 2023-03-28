@@ -1,11 +1,11 @@
-import classes from './styling/SearchBookDetail.module.scss'
 import { useParams } from 'react-router-dom'
+
+import classes from './styling/SearchBookDetail.module.scss'
+
 const SearchBookDetail = ({ book }) => {
   const params = useParams()
-  console.log(book)
-  console.log(params.bookID)
   const [filteredResult] = book.filter((book) => String(book.ISBN) === String(params.bookID))
-  console.log(filteredResult)
+
   return (
     <section className={classes.bookDetail_container}>
       <div className={classes.card}>

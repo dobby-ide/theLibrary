@@ -1,9 +1,11 @@
 import React, { useReducer } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { bookActions } from '../../../store'
 import { RootState } from '../../../store'
 
 const UpdateBookModal: React.FC = ({ exit, isbn }) => {
+
   const dispatch = useDispatch()
   const book = useSelector((state: RootState) =>
     state.book.Books.filter((book) => String(book.ISBN) === isbn)
@@ -26,6 +28,7 @@ const UpdateBookModal: React.FC = ({ exit, isbn }) => {
     }
     return initialInputState
   }
+
   const [inputState, inputDispatch] = useReducer(inputStateReducer, initialInputState)
   const textChangeHandler = (e) => {
     inputDispatch({
@@ -34,16 +37,18 @@ const UpdateBookModal: React.FC = ({ exit, isbn }) => {
       payload: e.target.value
     })
   }
+
   const exitModal = () => {
     exit()
   }
+
   const onUpdateBookHandler = () => {
     const authors = inputState.authors.split(',')
 
     dispatch(bookActions.updateBookInfo({ isbn: isbn, inputState: inputState, authors: authors }))
     exit()
   }
-  console.log(inputState)
+
   return (
     <div>
       <div>

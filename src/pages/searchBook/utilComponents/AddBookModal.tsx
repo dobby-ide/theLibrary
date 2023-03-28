@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
+
 import { bookActions, RootState, userActions } from '../../../store'
 import classes from '../styling/AddBookModal.module.scss'
 
 const AddBookModal = ({ isbn, user, exitModal }) => {
-  const auser = useSelector((state: RootState) => state.user.Users)
+
   const dispatch = useDispatch()
   const borrowedBook = useSelector((state: RootState) =>
     state.book.Books.filter((book) => String(book.ISBN) === isbn)
@@ -14,11 +15,11 @@ const AddBookModal = ({ isbn, user, exitModal }) => {
     dispatch(userActions.cart({ userId: user, book: borrowedBook }))
     exitModal()
   }
+
   const exit = () => {
     exitModal()
   }
-  console.log(user)
-  console.log(borrowedBook)
+
   return (
     <div className={classes.addBookModal}>
       <div className={classes.text}>

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { RootState, bookActions, userActions } from '../../../store'
+
+import { RootState } from '../../../store'
 import AddBookModal from './AddBookModal'
 import classes from '../styling/BookCard.module.scss'
 import Search from './Search'
@@ -11,27 +12,30 @@ const BookCard: React.FC = ({ books }) => {
   const [result, setResult] = useState([])
   const [bookIsbn, setBookIsbn] = useState()
   const [openModal, setOpenModal] = useState(false)
-  const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.user.Users)
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
   const userEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
   const userId = useSelector((state: RootState) =>
     state.user.Users.filter((user) => String(user.email) === userEmail)
   )
+
   const exitModal = () => {
     setOpenModal(false)
   }
+
   const borrowingBookHandler = (e) => {
     const isbn = e.target.parentElement.id
     setBookIsbn(isbn)
     setOpenModal(true)
   }
+
   const onSearchingInputs = (inputByUser) => {
     setResult(inputByUser)
   }
+
   const onCategorySelectHandler = (result) => {
     result.length > 0 && setResult(result)
   }
+
   return (
     <section className={classes.bookCard_container}>
       <header className={classes.bookCard_container_header}>

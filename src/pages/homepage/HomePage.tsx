@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+
 import { RootState } from '../../store'
 import UserPage from '../user/UserPage'
 import classes from './Homepage.module.scss'
@@ -6,8 +7,7 @@ import classes from './Homepage.module.scss'
 const HomePage = () => {
   const loggedIn = useSelector((state: RootState) => state.login.isLoggedIn)
   const adminLoggedIn = useSelector((state: RootState) => state.adminLogin.isLoggedIn)
-  console.log(loggedIn)
-  console.log(adminLoggedIn)
+
   return (
     <section className={classes.homepage_container}>
       <div className={classes.homepage_right}>

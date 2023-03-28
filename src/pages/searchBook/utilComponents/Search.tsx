@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
 import classes from '../styling/Search.module.scss'
+
 const Search = ({ books, back }) => {
   const [term, setTerm] = useState('')
-
   const filteredResult = books.filter(({ title }) =>
     title.toLowerCase().includes(term.toLowerCase())
   )

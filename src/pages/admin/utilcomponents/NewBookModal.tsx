@@ -54,7 +54,7 @@ const NewBookModal = ({ closeModal }) => {
     e.preventDefault()
     closeModal()
   }
-  console.log(inputState)
+
   return (
     <div className={classes.newBookModal}>
       <button onClick={closingModalHandler}>X</button>
