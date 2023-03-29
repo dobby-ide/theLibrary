@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { bookActions } from '../../../store'
 import { RootState } from '../../../store'
+import { Authors } from '../../../data/mockData'
 
 const UpdateBookModal: React.FC = ({ exit, isbn }) => {
-
   const dispatch = useDispatch()
   const book = useSelector((state: RootState) =>
     state.book.Books.filter((book) => String(book.ISBN) === isbn)
@@ -43,12 +43,12 @@ const UpdateBookModal: React.FC = ({ exit, isbn }) => {
   }
 
   const onUpdateBookHandler = () => {
-    const authors = inputState.authors.split(',')
-
-    dispatch(bookActions.updateBookInfo({ isbn: isbn, inputState: inputState, authors: authors }))
+    // const authors = inputState.authors.split(',')
+    console.log(inputState)
+    dispatch(bookActions.updateBookInfo({ isbn: isbn, inputState: inputState }))
     exit()
   }
-
+  console.log(Authors)
   return (
     <div>
       <div>
@@ -85,11 +85,21 @@ const UpdateBookModal: React.FC = ({ exit, isbn }) => {
       </div>
       <div>
         <label>authors</label>
-        <input
+        <select name="authors" onChange={(e) => textChangeHandler(e)}>
+          <option defaultValue=""></option>
+          {Authors.map((author) => {
+            return (
+              <option key={author.name} value={author.name}>
+                {author.name}
+              </option>
+            )
+          })}
+        </select>
+        {/* <input
           name="authors"
           onChange={(e) => textChangeHandler(e)}
           type="text"
-          placeholder={selectedBook[0].authors.toString()}></input>
+          placeholder={selectedBook[0].authors.toString()}></input> */}
       </div>
       <button onClick={exitModal}>cancel</button>
       <button onClick={onUpdateBookHandler}>update</button>

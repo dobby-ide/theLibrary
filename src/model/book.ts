@@ -12,7 +12,7 @@ class Book {
   description: string
   publisher: string
   authors: Author[] | Author
-  status: string = 'Available'
+  status = 'Available'
   borrowerId?: number
   returnDate?: string
   category: Category
@@ -30,6 +30,7 @@ class Book {
     this.description = description
     this.publisher = publisher
     this.authors = authors
+    this.status === 'Available'
     this.category = category
     if (category === 'computer science') {
       this.imageUrl = `${cslogo}`

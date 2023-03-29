@@ -9,7 +9,7 @@ let authors:
   | 'William Rebus'
   | 'Matieu Matieauius'
 class Author {
-  name: String
+  name: string
   photoUrl?: string
   constructor(name: typeof authors) {
     this.name = name

@@ -27,7 +27,7 @@ const ReturnBook = () => {
   return (
     <div className={classes.returnBookContainer}>
       <div className={classes.bookToReturnContainer}>
-        {fullUser[0].booksBorrowed ? (
+        {fullUser[0].booksBorrowed.length > 0 ? (
           fullUser[0].booksBorrowed.map((book) => (
             <div className={classes.bookToReturn} id={book.ISBN} key={book.ISBN}>
               <div className={classes.bookToReturnIsbn}>{book.ISBN}</div>

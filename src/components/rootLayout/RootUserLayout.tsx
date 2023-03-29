@@ -10,7 +10,7 @@ function RootUserLayout() {
       <main>
         <Outlet />
       </main>
-      <Footer></Footer>
+      <Footer />
     </div>
   )
 }

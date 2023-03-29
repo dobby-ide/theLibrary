@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { singInWithGoogle } from './firebase_setup/firebase'
+
 import './App.css'
 import { RootState, userActions } from './store'
 import User from './model/user'
@@ -20,6 +20,7 @@ import ErrorPage from './pages/mainNavigation/ErrorPage'
 import SearchBookDetail from './pages/searchBook/SearchBookDetail'
 import UserPage from './pages/user/UserPage'
 import RootLayout from './components/rootLayout/RootLayout'
+import Footer from './pages/footer/Footer'
 
 function App() {
   const dispatch = useDispatch()
@@ -110,7 +111,7 @@ function App() {
           path: '/admin/books',
           element: (
             <Protected isSignedIn={isAdminSignedIn}>
-              <AdminBooks />{' '}
+              <AdminBooks />
             </Protected>
           )
         }
@@ -121,10 +122,6 @@ function App() {
   return (
     <div className="App">
       <RouterProvider router={router}></RouterProvider>
-      <div className="card">
-        <button onClick={addOneUser}>add user</button>
-        <span className="px-10"></span>
-      </div>
     </div>
   )
 }

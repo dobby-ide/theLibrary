@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { bookActions } from '../../../store'
 import Book from '../../../model/book'
-import classes from './NewBookModal.module.scss'
+import classes from '../styling/NewBookModal.module.scss'
 
 const initialInputState = {
   title: '',

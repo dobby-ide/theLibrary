@@ -1,0 +1,21 @@
+.adminBookContainer{
+	position: relative;
+	margin:auto auto;
+	display:flex;
+	flex-direction: column;
+	align-items: center;;
+
+
+
+}
+.button_addBook{
+	margin-top: 2rem;
+}
+.AdminBookCard_container{
+
+
+	margin: 2rem;
+	display:flex;
+	flex-wrap: wrap;
+	gap:2rem;
+}

@@ -1,5 +1,7 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 import { Users, books, Authors } from './data/mockData'
+import Author from './model/author'
+import Book from './model/book'
 const userIsLoggedIn = {
   isLoggedIn: false
 }
@@ -63,7 +65,7 @@ const booksSlice = createSlice({
     borrowBook(state, action) {
       console.log(action)
       const index = state.Books.findIndex((obj) => String(obj.ISBN) === action.payload.isbn)
-      let newState = [...state.Books]
+      const newState = [...state.Books]
       newState[index].borrowerId = action.payload.userId.id
       newState[index].status = 'not available'
       newState[index].returnDate = new Date(
@@ -84,9 +86,17 @@ const booksSlice = createSlice({
     },
     updateBookInfo(state, action) {
       const index = state.Books.findIndex((obj) => String(obj.ISBN) === action.payload.isbn)
-
-      state.Books[index] = action.payload.inputState
-      state.Books[index].authors = action.payload.authors
+      const newData = action.payload.inputState
+      const newAuthor = new Author(action.payload.inputState.authors)
+      const updateBook = new Book(
+        newData.ISBN,
+        newData.title,
+        newData.description,
+        newData.publisher,
+        [newAuthor],
+        newData.category
+      )
+      state.Books[index] = updateBook
     },
     removeBook(state, action) {
       const newState = state.Books.filter((book) => String(book.ISBN) !== action.payload)

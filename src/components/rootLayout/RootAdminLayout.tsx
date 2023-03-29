@@ -1,18 +1,19 @@
 import { Outlet } from 'react-router-dom'
 
-import Footer from '../../pages/footer/Footer'
+import classes from './styling/RootAdminLayout.module.scss'
 import AdminNavigation from '../../pages/mainNavigation/AdminNavigation'
-import MainNavigation from '../../pages/mainNavigation/MainNavigation'
+import Footer from '../../pages/footer/Footer'
 
-function RootAdminLayout() {
+function RootAdminLayout({ children }: Props) {
   return (
-    <div>
+    <section className={classes.rootAdminContainer}>
       <AdminNavigation />
       <main>
+        {children}
         <Outlet />
       </main>
-      <Footer></Footer>
-    </div>
+      <Footer />
+    </section>
   )
 }
 export default RootAdminLayout
