@@ -123,7 +123,7 @@ function App() {
       element: <ProjectResource />
     }
   ])
-  console.log(process.env)
+
   return (
     <div className="App">
       <RouterProvider router={router}></RouterProvider>

@@ -5,7 +5,7 @@ import { userActions } from '../../store'
 import User from '../../model/user'
 import { userLoginActions } from '../../store'
 import { currentUserActions } from '../../store'
-import { signInWithGoogle } from '../../firebase_setup/firebase'
+import { signInWithGoogle } from '../../../firebase.config'
 import classes from './styling/MainNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
