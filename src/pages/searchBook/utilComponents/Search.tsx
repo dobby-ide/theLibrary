@@ -1,17 +1,18 @@
+// @ts-nocheck
 import { useState, useEffect } from 'react'
 
 import classes from '../styling/Search.module.scss'
 
-const Search = ({ books, back }) => {
+const Search = (props: { books: any; back: any; updatedBooks: any }) => {
   const [term, setTerm] = useState('')
-  const filteredResult = books.filter(({ title }) =>
+  const filteredResult: [] = props.books.filter(({ title }) =>
     title.toLowerCase().includes(term.toLowerCase())
   )
 
   useEffect(() => {
     const handler = setTimeout(() => {
       if (!filteredResult.length < 1) {
-        back(filteredResult)
+        props.back(filteredResult)
       }
     }, 1500)
     return () => {

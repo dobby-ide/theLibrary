@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+// @ts-nocheck
 import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store'

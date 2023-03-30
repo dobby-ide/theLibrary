@@ -1,7 +1,7 @@
 import Book from '../model/book'
 import Author from '../model/author'
 import User from '../model/user'
-//what rrelationship there is between the author and thebook? only at the time of creating a new book a new author can be added
+//what relationship there is between the author and thebook? only at the time of creating a new book a new author can be added
 export const books = [
   new Book(
     23456,

@@ -4,12 +4,11 @@ import classes from './styling/RootAdminLayout.module.scss'
 import AdminNavigation from '../../pages/mainNavigation/AdminNavigation'
 import Footer from '../../pages/footer/Footer'
 
-function RootAdminLayout({ children }: Props) {
+function RootAdminLayout() {
   return (
     <section className={classes.rootAdminContainer}>
       <AdminNavigation />
       <main>
-        {children}
         <Outlet />
       </main>
       <Footer />

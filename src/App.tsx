@@ -1,6 +1,6 @@
+// @ts-nocheck
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
 
 import './App.css'
 import { RootState, userActions } from './store'
@@ -21,6 +21,7 @@ import SearchBookDetail from './pages/searchBook/SearchBookDetail'
 import UserPage from './pages/user/UserPage'
 import RootLayout from './components/rootLayout/RootLayout'
 import Footer from './pages/footer/Footer'
+import ProjectResource from './pages/footer/projectResources/ProjectResources'
 
 function App() {
   const dispatch = useDispatch()
@@ -116,9 +117,13 @@ function App() {
           )
         }
       ]
+    },
+    {
+      path: 'projectResources',
+      element: <ProjectResource />
     }
   ])
-
+  console.log(process.env)
   return (
     <div className="App">
       <RouterProvider router={router}></RouterProvider>

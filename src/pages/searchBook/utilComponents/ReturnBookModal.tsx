@@ -3,17 +3,17 @@ import { useDispatch } from 'react-redux'
 import { userActions, bookActions } from '../../../store'
 import classes from '../styling/ReturnBookModal.module.scss'
 
-const ReturnBookModal = ({ exitModal, isbn, userId }) => {
+const ReturnBookModal = (props: { exitModal: any; isbn: string; userId: any }) => {
   const dispatch = useDispatch()
 
   const exit = () => {
-    exitModal()
+    props.exitModal()
   }
 
   const onBookReturn = () => {
-    dispatch(userActions.returnBook({ user: userId, isbn: isbn }))
-    dispatch(bookActions.returnBook({ isbn: isbn }))
-    exitModal()
+    dispatch(userActions.returnBook({ user: props.userId, isbn: props.isbn }))
+    dispatch(bookActions.returnBook({ isbn: props.isbn }))
+    props.exitModal()
   }
 
   return (

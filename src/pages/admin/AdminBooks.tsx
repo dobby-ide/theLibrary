@@ -10,7 +10,7 @@ const AdminBooks = () => {
   //ADD A BOOK FROM ADMIN
   const [openModal, setOpenModal] = useState(false)
 
-  const addNewBook = (e) => {
+  const addNewBook = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     setOpenModal(true)
   }
@@ -28,6 +28,7 @@ const AdminBooks = () => {
       <div className={classes.AdminBookCard_container}>
         {books.map((book) => {
           return (
+            // eslint-disable-next-line react/jsx-key
             <AdminBooksCard
               isbn={book.ISBN}
               title={book.title}

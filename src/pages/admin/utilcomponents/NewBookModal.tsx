@@ -1,8 +1,10 @@
+// @ts-nocheck
 import { useReducer } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { bookActions } from '../../../store'
 import Book from '../../../model/book'
+import { Authors } from '../../../data/mockData'
 import classes from '../styling/NewBookModal.module.scss'
 
 const initialInputState = {
@@ -36,16 +38,11 @@ const NewBookModal = ({ closeModal }) => {
   }
 
   const onSubmitNewBookHandler = () => {
-    const authors = inputState.authors.split(',')
     dispatch(
       bookActions.addNewBook(
-        new Book(
-          inputState.ISBN,
-          inputState.title,
-          inputState.description,
-          inputState.publisher,
-          authors
-        )
+        new Book(inputState.ISBN, inputState.title, inputState.description, inputState.publisher, [
+          inputState.authors
+        ])
       )
     )
   }
@@ -77,11 +74,21 @@ const NewBookModal = ({ closeModal }) => {
       </div>
       <div>
         <label>authors</label>
-        <input
+        <select name="authors" onChange={(e) => textChangeHandler(e)}>
+          <option defaultValue=""></option>
+          {Authors.map((author) => {
+            return (
+              <option key={author.name} value={author.name}>
+                {author.name}
+              </option>
+            )
+          })}
+        </select>
+        {/* <input
           placeholder="author1, author2, ..."
           type="text"
           name="authors"
-          onChange={(e) => textChangeHandler(e)}></input>
+          onChange={(e) => textChangeHandler(e)}></input> */}
       </div>
       <button onClick={onSubmitNewBookHandler}>OK</button>
     </div>

@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom'
 
-function Protected({ isSignedIn, children }) {
-  if (!isSignedIn) {
+function Protected(props: { isSignedIn: string; children: HTMLCollection }) {
+  if (!props.isSignedIn) {
     return <Navigate to="/" replace />
   }
-  return children
+  return props.children
 }
 export default Protected

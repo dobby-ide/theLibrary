@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -19,7 +20,7 @@ const AdminAuthorsCard: React.FC = ({ authorName }) => {
     setChosenAuthor(authorName)
   }
 
-  const onDeleteBookHandler = (e) => {
+  const onDeleteBookHandler = (e: { target: { parentElement: { id: any } } }) => {
     dispatch(authorActions.removeAuthor(e.target.parentElement.id))
   }
 

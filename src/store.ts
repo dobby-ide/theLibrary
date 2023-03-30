@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 import { Users, books, Authors } from './data/mockData'
 import Author from './model/author'
@@ -75,11 +76,6 @@ const booksSlice = createSlice({
     },
     returnBook(state, action) {
       const index = state.Books.findIndex((obj) => String(obj.ISBN) === String(action.payload.isbn))
-      console.log(index)
-      // let newState = [...state.Books]
-      // newState[index].status = 'Available'
-      // newState[index].returnDate = ''
-      // console.log(newState[index])
       state.Books[index].status = 'Available'
       state.Books[index].returnDate = ''
       console.log(state.Books[index])

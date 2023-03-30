@@ -19,7 +19,6 @@ const AdminEntryForm = () => {
     if (id === '112233') {
       dispatch(adminLoginActions.loginAccepted())
       navigate('/admin')
-    } else {
     }
   }
 

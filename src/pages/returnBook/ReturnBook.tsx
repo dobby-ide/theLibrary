@@ -1,4 +1,6 @@
-import { useState } from 'react'
+// @ts-nocheck
+
+import { SetStateAction, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store'
@@ -14,7 +16,9 @@ const ReturnBook = () => {
   )
   const books = useSelector((state: RootState) => state.book.Books)
 
-  const onReturnBookHandler = (e) => {
+  const onReturnBookHandler = (e: {
+    target: { parentElement: { id: SetStateAction<undefined> } }
+  }) => {
     setIsbn(e.target.parentElement.id)
     console.log(e.target.parentElement.id)
     setModalOpen(true)

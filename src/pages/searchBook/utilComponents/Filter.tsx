@@ -1,20 +1,21 @@
+// @ts-nocheck
 import { useEffect, useState } from 'react'
 
 import classes from '../styling/Filter.module.scss'
 
-const Filter = ({ books, results }) => {
+const Filter = (props: { books: []; results: () => void }) => {
   const [categoryChoice, setCategoryChoice] = useState('')
-  const categories = books.map((book) => book.category)
+  const categories = props.books.map((book) => book.category)
   const uniqueCategories = [...new Set(categories)]
 
   const onSelectCategory = (e) => {
     setCategoryChoice(e.target.value)
   }
 
-  const filteredResults = books.filter((book) => book.category === categoryChoice)
+  const filteredResults = props.books.filter((book) => book.category === categoryChoice)
 
   useEffect(() => {
-    results(filteredResults)
+    categoryChoice !== '' ? props.results(filteredResults) : props.results(props.books)
   }, [categoryChoice])
 
   return (

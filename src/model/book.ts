@@ -4,6 +4,7 @@ import rllogo from '../assets/images/rllogo.svg'
 import biologo from '../assets/images/biologo.svg'
 import falogo from '../assets/images/falogo.svg'
 import splogo from '../assets/images/splogo.svg'
+import User from './user'
 export type Category = 'fantasy' | 'bio' | 'sport' | 'real-life' | 'computer science'
 
 class Book {
@@ -11,9 +12,9 @@ class Book {
   title: string
   description: string
   publisher: string
-  authors: Author[] | Author
+  authors: Author[]
   status = 'Available'
-  borrowerId?: number
+  borrowerId?: User['id']
   returnDate?: string
   category: Category
   imageUrl?: string

@@ -16,5 +16,8 @@ class User {
     this.lastName = lastName
     this.email = email
   }
+  getId() {
+    return this.id
+  }
 }
 export default User
