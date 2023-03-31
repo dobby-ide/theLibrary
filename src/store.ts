@@ -49,6 +49,7 @@ const authorsSlice = createSlice({
       state.Authors = newState
     },
     updateAuthor(state, action) {
+      console.log(action)
       const index = state.Authors.findIndex((obj) => String(obj.name) === action.payload.index)
       let newState = [...state.Authors]
       newState[index].name = action.payload.name

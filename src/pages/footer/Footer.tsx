@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import classes from './Footer.module.scss'
+import brain from '../../assets/images/brain.svg'
 
 const Footer = () => {
   return (
@@ -9,10 +10,17 @@ const Footer = () => {
         <nav>
           <ul className={classes.navigation}>
             <li>
-              <Link to="projectResources">developed with love</Link>
+              <Link to="/projectResources">
+                <div className={classes.li_img}>
+                  developed with
+                  <img className={classes.brain} src={brain}></img>
+                </div>
+              </Link>
             </li>
             <li>
-              <Link to="projectResources">project info</Link>
+              <Link to="/projectResources">
+                <div className={classes.li}>project info</div>
+              </Link>
             </li>
           </ul>
         </nav>

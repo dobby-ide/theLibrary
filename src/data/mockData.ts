@@ -89,8 +89,9 @@ export const Authors = [
 ]
 
 export const Users = [
-  new User("Fabio", "Privitera", "fabioprivitera@integrify.io"),
-  new User("Marco", "Pantellaro", "marpan@integrify.io"),
-  new User("Giovanna", "Pierpaolini", "giopier@integrify.io"),
-  new User("Fabio", "Musini", "famusini@integrify.io"),
+  new User('a', 'a', 'a', '1'),
+  new User('Fabio', 'Privitera', 'fabioprivitera@integrify.io', '112233'),
+  new User('Marco', 'Pantellaro', 'marpan@integrify.io', '112233'),
+  new User('Giovanna', 'Pierpaolini', 'giopier@integrify.io', '112233'),
+  new User('Fabio', 'Musini', 'famusini@integrify.io', '112233')
 ]

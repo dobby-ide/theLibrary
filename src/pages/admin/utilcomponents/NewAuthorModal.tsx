@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { authorActions, RootState } from '../../../store'
 import Author from '../../../model/author'
+import { Button } from '@mantine/core'
 
 const NewAuthorModal = ({ closeModal }) => {
   const author = useSelector((state: RootState) => state.author.Authors)
@@ -32,7 +33,9 @@ const NewAuthorModal = ({ closeModal }) => {
         <label>name and surname</label>
         <input type="text" onChange={(e) => textChangeHandler(e)}></input>
       </div>
-      <button onClick={onSubmitNewAuthor}>OK</button>
+      <Button color="black" variant="filled" onClick={onSubmitNewAuthor}>
+        OK
+      </Button>
     </div>
   )
 }

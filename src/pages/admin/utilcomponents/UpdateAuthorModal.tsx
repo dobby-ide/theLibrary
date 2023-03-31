@@ -19,10 +19,10 @@ const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
   }
 
   const onUpdateAuthorHandler = () => {
-    dispatch(authorActions.updateAuthor({ name: authorName, index: name }))
+    dispatch(authorActions.updateAuthor({ name: authorName, index: props.name }))
     props.exit()
   }
-
+console.log(author[0])
   return (
     <div>
       <div>

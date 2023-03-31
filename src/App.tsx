@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { MantineProvider, Text } from '@mantine/core'
 import './App.css'
+
 import { RootState, userActions } from './store'
 import User from './model/user'
 import HomePage from './pages/homepage/HomePage'
@@ -22,12 +23,14 @@ import UserPage from './pages/user/UserPage'
 import RootLayout from './components/rootLayout/RootLayout'
 import Footer from './pages/footer/Footer'
 import ProjectResource from './pages/footer/projectResources/ProjectResources'
+import { Root } from 'react-dom/client'
+import AuthenticationTitle from './components/entryForm/EntryFormMantine'
 
 function App() {
   const dispatch = useDispatch()
   const books = useSelector((state: RootState) => state.book.Books)
   const isAdminSignedIn = useSelector((state: RootState) => state.adminLogin.isLoggedIn)
-  const isUserSignedIn = true
+  const isUserSignedIn = useSelector((state: RootState) => state.login.isLoggedIn)
   const user = useSelector((state: RootState) => state.user)
 
   const addOneUser = () => {
@@ -41,7 +44,7 @@ function App() {
       errorElement: <ErrorPage></ErrorPage>,
       children: [
         { index: true, element: <HomePage /> },
-        { path: 'userlogin', element: <EntryForm /> },
+        { path: 'userlogin', element: <AuthenticationTitle /> },
         { path: 'adminlogin', element: <AdminEntryForm /> },
         {
           path: 'browsebook',
@@ -51,43 +54,43 @@ function App() {
       ]
     },
     {
-      path: 'user',
+      path: '/user',
       element: (
-        <ProtectedU isSignedIn={isUserSignedIn}>
+        <Protected isSignedIn={isUserSignedIn}>
           <RootUserLayout />
-        </ProtectedU>
+        </Protected>
       ),
       children: [
         {
-          index: true,
+          path: '/user',
           element: (
-            <ProtectedU isSignedIn={isUserSignedIn}>
+            <Protected isSignedIn={isUserSignedIn}>
               <UserPage />
-            </ProtectedU>
+            </Protected>
           )
         },
         {
           path: 'return',
           element: (
-            <ProtectedU isSignedIn={isUserSignedIn}>
+            <Protected isSignedIn={isUserSignedIn}>
               <ReturnBook />
-            </ProtectedU>
+            </Protected>
           )
         },
         {
           path: 'search',
           element: (
-            <ProtectedU isSignedIn={isUserSignedIn}>
+            <Protected isSignedIn={isUserSignedIn}>
               <SearchBook />
-            </ProtectedU>
+            </Protected>
           )
         },
         {
           path: 'search/:bookID',
           element: (
-            <ProtectedU isSignedIn={isUserSignedIn}>
+            <Protected isSignedIn={isUserSignedIn}>
               <SearchBookDetail book={books} />
-            </ProtectedU>
+            </Protected>
           )
         }
       ]
@@ -119,16 +122,27 @@ function App() {
       ]
     },
     {
-      path: 'projectResources',
+      path: '/projectResources',
       element: <ProjectResource />
     }
   ])
 
   return (
-    <div className="App">
-      <RouterProvider router={router}></RouterProvider>
-    </div>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <div className="App">
+        <RouterProvider router={router}></RouterProvider>
+      </div>
+    </MantineProvider>
   )
 }
-
+// export const firebaseConfig = {
+//   apiKey: import.meta.env.VITE_apiKey,
+//   authDomain: import.meta.env.VITE_authdomain,
+//   projectId: import.meta.env.VITE_projectId,
+//   storageBucket: import.meta.env.VITE_storageBucket,
+//   messagingSenderId: import.meta.env.VITE_messagingSenderId,
+//   appId: import.meta.env.VITE_appId,
+//   measurementId: import.meta.env.VITE_measurementId
+// }
 export default App
+

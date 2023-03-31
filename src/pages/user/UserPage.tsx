@@ -7,13 +7,15 @@ import classes from './styling/UserPage.module.scss'
 
 const UserPage = () => {
   const user = useSelector((state: RootState) => state.currentUser.currentUserEmail)
+  const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
+
   const fullUser = useSelector((state: RootState) =>
     state.user.Users.filter((currUser) => String(currUser.email) === user)
   )
 
   return (
     <div className={classes.userPageContainer}>
-      <h2>Welcome {user}</h2>
+      <h2>Welcome {userName}</h2>
       <div className={classes.booToReturnContainer}>
         {fullUser[0].booksBorrowed.length > 0 && <h2>Current books on loan:</h2>}
         {fullUser[0].booksBorrowed.length > 0 ? (

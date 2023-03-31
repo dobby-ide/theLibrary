@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, signInWithPopup } from 'firebase/auth'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { getAnalytics } from 'firebase/analytics'
-import { firebaseConfig } from './fireconfig'
+import { firebaseConfig } from './src/fireconfig'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries

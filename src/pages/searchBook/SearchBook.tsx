@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store'
+
 import BookCard from './utilComponents/BookCard'
 import Book from '../../model/book'
 import classes from './styling/SearchBook.module.scss'

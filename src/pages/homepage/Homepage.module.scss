@@ -1,16 +1,14 @@
 .homepage_container {
-  width: 100%;
 
-  display: flex;
 
-  top: 15rem;
+
   height: 50vh;
   gap:1rem;
-
+  text-align: center;
 }
 
 .homepage_right {
+  text-align: center;
 	margin-top:3rem;
-	border:1px solid black;
 	font-size: 1.5rem;
 }

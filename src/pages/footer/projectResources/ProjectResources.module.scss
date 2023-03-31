@@ -1,0 +1,22 @@
+.projectRes_container{
+margin-top: 3rem;
+text-align: center;
+}
+.flexContainer{
+	display:flex;
+	&_right{
+
+	}
+	&_left{
+		margin-left: 2rem;;
+		line-height: 1.5rem;
+		text-align: justify;
+		width:25rem;
+	}
+}
+
+h1{
+	font-size: 12px;
+	margin-bottom: 3px;
+	border-bottom: 3px solid rgb(117, 117, 117);
+}

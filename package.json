@@ -12,6 +12,9 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@mantine/core": "6.0.0",
+    "@mantine/hooks": "6.0.0",
     "@reduxjs/toolkit": "^1.9.3",
     "dotenv": "^16.0.3",
     "firebase": "^9.18.0",

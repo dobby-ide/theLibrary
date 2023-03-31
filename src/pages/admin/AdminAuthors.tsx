@@ -18,6 +18,7 @@ const AdminAuthors = () => {
   }
 
   const authors = useSelector((state: RootState) => state.author.Authors)
+
   return (
     <div>
       <h1>I am admin authors page</h1>
