@@ -5,9 +5,14 @@ import { Link } from 'react-router-dom'
 import { userLoginActions, currentUserActions, RootState } from '../../store'
 import classes from './styling/UserNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
+import { Root } from 'react-dom/client'
 
 const UserNavigation = () => {
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
+  const userEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
+  const users = useSelector((state: RootState) => state.user.Users)
+  const [currentUser] = users.filter((user) => user.email === userEmail)
+  console.log(currentUser)
   const location = useLocation()
   let user = location.state
   const navigate = useNavigate()
@@ -38,9 +43,7 @@ const UserNavigation = () => {
           <li>
             <button onClick={backToMainPage}>LogOut {userName}</button>
           </li>
-          <li>
-            <Link to="/user/return">return</Link>
-          </li>
+          <li>{currentUser.booksBorrowed.length > 0 && <Link to="/user/return">return</Link>}</li>
           <li>
             <Link to="/user/search">search</Link>
           </li>
