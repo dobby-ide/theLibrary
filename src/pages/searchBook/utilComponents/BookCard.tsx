@@ -10,6 +10,7 @@ import Search from './Search'
 import Filter from './Filter'
 import Book from '../../../model/book'
 import { books } from '../../../data/mockData'
+import { Card } from '@mantine/core'
 
 const BookCard = (props: { books: Book[] }) => {
   const [result, setResult] = useState(Array<Item>)
@@ -51,14 +52,14 @@ const BookCard = (props: { books: Book[] }) => {
         )}
         {result.map((book) => {
           return !userName ? (
-            <div key={book.ISBN} className={classes.singleCard_container}>
+            <Card shadow="sm" padding="lg" key={book.ISBN} className={classes.singleCard_container}>
               <Link to={`./${book.ISBN}`} relative="path">
                 <div className={classes.bookTitle}>{book.title}</div>
 
-                <div className={classes.bookDescr}>Description: {book.description}</div>
-                <div className={classes.bookPublisher}>Publisher: {book.publisher}</div>
+                <div className={classes.bookDescr}>{book.description}</div>
+
                 <div className={`${book.status} === "Available" && ${classes.bookStatusAvailable}`}>
-                  Status: {book.status}
+                  {book.status}
                 </div>
                 {book.returnDate && (
                   <div className={classes.bookReturnData}>Return day: {book.returnDate}</div>
@@ -71,14 +72,19 @@ const BookCard = (props: { books: Book[] }) => {
                     </div>
                   )
                 })}
-                <div className={classes.bookIsbn}>ISBN: {book.ISBN}</div>
+
                 <div className={classes.imageContainer}>
                   <img className={classes.image} src={book.imageUrl}></img>
                 </div>
               </Link>
-            </div>
+            </Card>
           ) : (
-            <div className={classes.singleCard_container} key={book.ISBN} id={book.ISBN}>
+            <Card
+              shadow="sm"
+              padding="lg"
+              className={classes.singleCard_container}
+              key={book.ISBN}
+              id={book.ISBN}>
               {book.status === 'Available' && (
                 <button className={classes.borrowingBook_button} onClick={borrowingBookHandler}>
                   borrow
@@ -91,13 +97,11 @@ const BookCard = (props: { books: Book[] }) => {
                 </div>
 
                 <div className={classes.bookDescr}>
-                  Description: <p>{book.description}</p>
+                  <p>{book.description}</p>
                 </div>
-                <div className={classes.bookPublisher}>
-                  Publisher: <p>{book.publisher}</p>
-                </div>
+
                 <div className={`${book.status} === "Available" && ${classes.bookStatusAvailable}`}>
-                  Status: <p>{book.status}</p>
+                  <p>{book.status}</p>
                 </div>
                 {book.returnDate && (
                   <div className={classes.bookReturnDate}>Return day: {book.returnDate}</div>
@@ -110,14 +114,12 @@ const BookCard = (props: { books: Book[] }) => {
                     </div>
                   )
                 })}
-                <div className={classes.bookIsbn}>
-                  ISBN: <p>{book.ISBN}</p>
-                </div>
+
                 <div className={classes.imageContainer}>
                   <img className={classes.image} src={book.imageUrl}></img>
                 </div>
               </Link>
-            </div>
+            </Card>
           )
         })}
       </div>

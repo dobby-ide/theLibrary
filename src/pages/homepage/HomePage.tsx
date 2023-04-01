@@ -9,7 +9,7 @@ import { useState } from 'react'
 import './Modal.css'
 
 const HomePage = () => {
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   const { state } = useLocation()
   const loggedIn = useSelector((state: RootState) => state.login.isLoggedIn)
   const adminLoggedIn = useSelector((state: RootState) => state.adminLogin.isLoggedIn)
