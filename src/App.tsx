@@ -43,7 +43,7 @@ function App() {
       element: <RootLayout />,
       errorElement: <ErrorPage></ErrorPage>,
       children: [
-        { index: true, element: <HomePage /> },
+        { path: ':name', element: <HomePage /> },
         { path: 'userlogin', element: <AuthenticationTitle /> },
         { path: 'adminlogin', element: <AdminEntryForm /> },
         {
@@ -135,14 +135,6 @@ function App() {
     </MantineProvider>
   )
 }
-// export const firebaseConfig = {
-//   apiKey: import.meta.env.VITE_apiKey,
-//   authDomain: import.meta.env.VITE_authdomain,
-//   projectId: import.meta.env.VITE_projectId,
-//   storageBucket: import.meta.env.VITE_storageBucket,
-//   messagingSenderId: import.meta.env.VITE_messagingSenderId,
-//   appId: import.meta.env.VITE_appId,
-//   measurementId: import.meta.env.VITE_measurementId
-// }
+
 export default App
 

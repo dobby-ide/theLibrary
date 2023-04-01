@@ -10,25 +10,25 @@ import {
   Group,
   Button
 } from '@mantine/core'
+import { CSSTransition } from 'react-transition-group'
+import { useState } from 'react'
+
 import useForm from './hook/useForm'
 
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import User from '../../model/user'
 import { currentUserActions, RootState, userActions, userLoginActions } from '../../store'
 import classes from './EntryForm.module.scss'
+import './Modal.css'
 
 export function AuthenticationTitle() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const loggedIn = useSelector((state: RootState) => state.login.isLoggedIn)
+  const [isModalOn, setIsModalOn] = useState(false)
   const [okRegistration, setOkRegistration] = useState(false)
   const [emailAlreadyExist, setEmailAlreadyExist] = useState(false)
-  // const [name, setName] = useState()
-  // const [lastName, setLastName] = useState()
-  // const [email, setEmail] = useState()
-  // const [password, setPassword] = useState()
   const [switchForm, setRegisterNewUser] = useState(false)
   const user = useSelector((state: RootState) => state.user)
 
@@ -75,10 +75,34 @@ export function AuthenticationTitle() {
         )
       )
       setOkRegistration(true)
-      navigate('/userlogin')
+      setIsModalOn(true)
+
+      setTimeout(
+        () =>
+          navigate(`/:${formData.name}`, {
+            state: {
+              name: formData.name!,
+              lastName: formData.lastName!,
+              email: formData.email!,
+              password: formData.password!
+            }
+          }),
+        2000
+      )
     }
   }
-
+  const toggleModal = () => {
+    setIsModalOn(!isModalOn)
+    setOkRegistration(!okRegistration)
+    navigate(`/:${formData.name}`, {
+      state: {
+        name: formData.name!,
+        lastName: formData.lastName!,
+        email: formData.email!,
+        password: formData.password!
+      }
+    })
+  }
   const signInHandler = (event: any) => {
     event.preventDefault()
   }
@@ -183,6 +207,19 @@ export function AuthenticationTitle() {
           </Button>
         )}
       </Paper>
+      <CSSTransition in={isModalOn} timeout={3000} classNames="modal" active unmountOnExit>
+        <div className="modal-container">
+          <div className="modal-content">
+            <h2>SUCCESSFULLY REGISTERED</h2>
+            <div className="modal-content__name">NAME: {formData.name}</div>
+            <div className="modal-content__lastName">LASTNAME: {formData.lastName}</div>
+            <div className="modal-content__email">EMAIL: {formData.email}</div>
+          </div>
+          <button className="modal-container_button" onClick={toggleModal}>
+            x
+          </button>
+        </div>
+      </CSSTransition>
     </Container>
   )
 }
