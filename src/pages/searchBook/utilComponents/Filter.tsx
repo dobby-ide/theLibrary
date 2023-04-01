@@ -21,7 +21,7 @@ const Filter = (props: { books: []; results: () => void }) => {
   return (
     <div className={classes.switch}>
       <div className={classes.switch__main}>
-        <p className={classes.switch__main_paragraph}>choose a category:</p>
+        <p className={classes.switch__main_paragraph}>category:</p>
         <select onChange={onSelectCategory} className={classes.switch__dropdown}>
           <option defaultValue=""></option>
           {uniqueCategories.map((cat) => {

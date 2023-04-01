@@ -4,10 +4,11 @@
 	margin-bottom: 3rem;
 
 	&_header{
-		height:6rem;
+		overflow: hidden;
+		height:4rem;
 		width:75vw;
 		display:flex;
-		background-color: yellowgreen;
+		background:linear-gradient(to bottom, yellowgreen 90%,rgb(234, 234, 234));
 	}
 }
 .renderedBooks{

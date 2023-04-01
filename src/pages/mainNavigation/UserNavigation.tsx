@@ -1,12 +1,13 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { userLoginActions, currentUserActions } from '../../store'
+import { userLoginActions, currentUserActions, RootState } from '../../store'
 import classes from './styling/UserNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
 const UserNavigation = () => {
+  const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
   const location = useLocation()
   let user = location.state
   const navigate = useNavigate()
@@ -35,7 +36,7 @@ const UserNavigation = () => {
       <nav className={classes.nav}>
         <ul>
           <li>
-            <button onClick={backToMainPage}>LogOut {user}</button>
+            <button onClick={backToMainPage}>LogOut {userName}</button>
           </li>
           <li>
             <Link to="/user/return">return</Link>
