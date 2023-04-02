@@ -16,7 +16,6 @@
     "@mantine/core": "6.0.0",
     "@mantine/hooks": "6.0.0",
     "@reduxjs/toolkit": "^1.9.3",
-    "dotenv": "^16.0.3",
     "firebase": "^9.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

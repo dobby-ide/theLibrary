@@ -6,6 +6,7 @@ import { bookActions } from '../../../store'
 import Book from '../../../model/book'
 import { Authors } from '../../../data/mockData'
 import classes from '../styling/NewBookModal.module.scss'
+import Author from '../../../model/author'
 
 const initialInputState = {
   title: '',
@@ -40,9 +41,14 @@ const NewBookModal = ({ closeModal }) => {
   const onSubmitNewBookHandler = () => {
     dispatch(
       bookActions.addNewBook(
-        new Book(inputState.ISBN, inputState.title, inputState.description, inputState.publisher, [
-          inputState.authors
-        ])
+        new Book(
+          inputState.ISBN,
+          inputState.title,
+          inputState.description,
+          inputState.publisher,
+          [new Author(inputState.authors)],
+          inputState.year
+        )
       )
     )
   }
@@ -51,7 +57,7 @@ const NewBookModal = ({ closeModal }) => {
     e.preventDefault()
     closeModal()
   }
-
+  console.log(inputState)
   return (
     <div className={classes.newBookModal}>
       <button onClick={closingModalHandler}>X</button>
@@ -73,6 +79,10 @@ const NewBookModal = ({ closeModal }) => {
         <input type="text" name="publisher" onChange={(e) => textChangeHandler(e)}></input>
       </div>
       <div>
+        <label>year</label>
+        <input type="text" name="year" onChange={(e) => textChangeHandler(e)}></input>
+      </div>
+      <div>
         <label>authors</label>
         <select name="authors" onChange={(e) => textChangeHandler(e)}>
           <option defaultValue=""></option>
@@ -84,11 +94,6 @@ const NewBookModal = ({ closeModal }) => {
             )
           })}
         </select>
-        {/* <input
-          placeholder="author1, author2, ..."
-          type="text"
-          name="authors"
-          onChange={(e) => textChangeHandler(e)}></input> */}
       </div>
       <button onClick={onSubmitNewBookHandler}>OK</button>
     </div>

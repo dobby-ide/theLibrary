@@ -4,19 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { bookActions } from '../../../store'
 import { RootState } from '../../../store'
 import { Authors } from '../../../data/mockData'
+import classes from '../styling/UpdateBookModal.module.scss'
 
-const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
+const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
   const dispatch = useDispatch()
+
   const book = useSelector((state: RootState) =>
     state.book.Books.filter((book) => String(book.ISBN) === props.isbn)
   )
-  const selectedBook = book
+
   const initialInputState = {
-    title: '',
-    description: '',
-    ISBN: '',
-    publisher: '',
-    authors: ''
+    title: book[0].title,
+    description: book[0].description,
+    ISBN: book[0].ISBN,
+    publisher: book[0].publisher,
+    authors: book[0].authors[0].name
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,6 +32,7 @@ const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
     return initialInputState
   }
   const [inputState, inputDispatch] = useReducer(inputStateReducer, initialInputState)
+
   const textChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -45,21 +48,19 @@ const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
   }
 
   const onUpdateBookHandler = () => {
-    // const authors = inputState.authors.split(',')
-    console.log(inputState)
     dispatch(bookActions.updateBookInfo({ isbn: props.isbn, inputState: inputState }))
     props.exit()
   }
-  console.log(Authors)
+  console.log(inputState)
   return (
-    <div>
+    <div className={classes.updateBookModal__container}>
       <div>
         <label>ISBN</label>
         <input
           name="ISBN"
           onChange={(e) => textChangeHandler(e)}
           type="text"
-          defaultValue={selectedBook[0].ISBN}></input>
+          value={inputState.ISBN}></input>
       </div>
       <div>
         <label>title</label>
@@ -67,7 +68,7 @@ const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
           name="title"
           onChange={(e) => textChangeHandler(e)}
           type="text"
-          defaultValue={selectedBook[0].title}></input>
+          defaultValue={inputState.title}></input>
       </div>
       <div>
         <label>description</label>
@@ -75,7 +76,7 @@ const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
           name="description"
           onChange={(e) => textChangeHandler(e)}
           type="text"
-          defaultValue={selectedBook[0].description}></input>
+          defaultValue={inputState.description}></input>
       </div>
       <div>
         <label>publisher</label>
@@ -83,12 +84,12 @@ const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
           name="publisher"
           onChange={(e) => textChangeHandler(e)}
           type="text"
-          defaultValue={selectedBook[0].publisher}></input>
+          value={inputState.publisher}></input>
       </div>
-      <div>
+      <div className={classes.authors}>
         <label>authors</label>
         <select name="authors" onChange={(e) => textChangeHandler(e)}>
-          <option defaultValue=""></option>
+          <option value={inputState.authors}>{inputState.authors}</option>
           {Authors.map((author) => {
             return (
               <option key={author.name} value={author.name}>
@@ -97,11 +98,6 @@ const UpdateBookModal = (props: { exit: () => void; isbn: string }) => {
             )
           })}
         </select>
-        {/* <input
-          name="authors"
-          onChange={(e) => textChangeHandler(e)}
-          type="text"
-          placeholder={selectedBook[0].authors.toString()}></input> */}
       </div>
       <button onClick={exitModal}>cancel</button>
       <button onClick={onUpdateBookHandler}>update</button>

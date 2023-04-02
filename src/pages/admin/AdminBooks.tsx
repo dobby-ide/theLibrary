@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
 
 import { RootState } from '../../store'
 import AdminBooksCard from './utilcomponents/AdminBooksCard'
 import NewBookModal from './utilcomponents/NewBookModal'
 import classes from './styling/AdminBooks.module.scss'
+import './styling/AdminBook.scss'
 
 const AdminBooks = () => {
-  //ADD A BOOK FROM ADMIN
   const [openModal, setOpenModal] = useState(false)
 
   const addNewBook = (e: { preventDefault: () => void }) => {
@@ -20,10 +21,32 @@ const AdminBooks = () => {
   }
 
   const books = useSelector((state: RootState) => state.book.Books)
+  console.log(books)
+  const toggleModal = () => {
+    setOpenModal(!openModal)
+  }
   return (
     <section className={classes.adminBookContainer}>
-      <div className={classes.button_addBook}>
-        <button onClick={addNewBook}>add a new book</button>
+      <div className={classes.AdminPanel}>
+        <div className={classes.button_addBook}>
+          <CSSTransition
+            in={openModal}
+            timeout={3000}
+            classNames="modalNewBook"
+            active
+            unmountOnExit>
+            <div className="modalNewBook-container">
+              <h2 className="modalF-content__title">Creating a new book mode</h2>
+              <NewBookModal closeModal={onClosingModalHandler} />
+
+              <button className="modalF-container_button" onClick={toggleModal}>
+                x
+              </button>
+            </div>
+          </CSSTransition>
+
+          <button onClick={addNewBook}>add a new book</button>
+        </div>
       </div>
       <div className={classes.AdminBookCard_container}>
         {books.map((book) => {
@@ -41,7 +64,6 @@ const AdminBooks = () => {
             />
           )
         })}
-        {openModal && <NewBookModal closeModal={onClosingModalHandler} />}
       </div>
     </section>
   )

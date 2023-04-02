@@ -9,7 +9,8 @@ export const books = [
     'a story of an everyday life',
     'TRECCANI',
     [new Author('Matteo Renga'), new Author('Matieu Matieauius')],
-    'real-life'
+    'real-life',
+    2014
   ),
   new Book(
     23457,
@@ -17,7 +18,8 @@ export const books = [
     'a story of an everyday life 2',
     'Tregatti',
     [new Author('Matteo Renga'), new Author('Matieu Matieauius')],
-    'real-life'
+    'real-life',
+    2022
   ),
   new Book(
     23458,
@@ -25,7 +27,8 @@ export const books = [
     'a story of an everyday life3',
     'Marzian',
     [new Author('Matieu Matieauius')],
-    'real-life'
+    'real-life',
+    2023
   ),
   new Book(
     23459,
@@ -33,7 +36,8 @@ export const books = [
     'a story of an everyday life4',
     'merrer',
     [new Author('Matteo Renga')],
-    'real-life'
+    'real-life',
+    2021
   ),
   new Book(
     23460,
@@ -41,7 +45,8 @@ export const books = [
     'A compilation of common mistakes that makes the compiler angry',
     'Oracle',
     [new Author('William Rebus'), new Author('Maio Caio')],
-    'computer science'
+    'computer science',
+    1990
   ),
   new Book(
     23461,
@@ -49,7 +54,8 @@ export const books = [
     'All about Beethoven, since his early childhood',
     'Tregatti',
     [new Author('Matteo Renga'), new Author('Boris')],
-    'bio'
+    'bio',
+    1980
   ),
   new Book(
     23462,
@@ -57,7 +63,8 @@ export const books = [
     'To Linux 4.0',
     'Treccani',
     [new Author('Maio Caio'), new Author('Mark Max')],
-    'bio'
+    'bio',
+    2023
   ),
   new Book(
     23463,
@@ -65,7 +72,8 @@ export const books = [
     'dedicated schema and analysis',
     'Treccani',
     [new Author('Matteo Renga'), new Author('Matieu Matieauius')],
-    'sport'
+    'sport',
+    2015
   ),
   new Book(
     23464,
@@ -73,7 +81,8 @@ export const books = [
     'a fantastic story',
     'Treccani',
     [new Author('Matteo Renga')],
-    'fantasy'
+    'fantasy',
+    2000
   )
 ]
 

@@ -18,7 +18,7 @@ const SearchBookDetail = (props: { book: Book[] }) => {
       title: book.title,
 
       author: author,
-      year: 222,
+      year: book.year,
       reviews: {
         positive: 2,
         negative: 2

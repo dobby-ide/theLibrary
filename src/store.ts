@@ -42,7 +42,8 @@ const authorsSlice = createSlice({
   initialState: initialAuthorsState,
   reducers: {
     addAuthor(state, action) {
-      state.Authors = [...state.Authors, action.payload]
+      const newState = [...state.Authors, action.payload]
+      state.Authors = newState
     },
     removeAuthor(state, action) {
       const newState = state.Authors.filter((author) => String(author.name) !== action.payload)

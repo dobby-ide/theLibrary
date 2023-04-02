@@ -17,6 +17,7 @@ class Book {
   borrowerId?: User['id']
   returnDate?: string
   category: Category
+  year: number
   imageUrl?: string
   constructor(
     ISBN: number,
@@ -24,7 +25,9 @@ class Book {
     description: string,
     publisher: string,
     authors: Author[],
-    category: Category
+    category: Category,
+    year: number,
+    review?: [{ positive: number; negative: number }]
   ) {
     this.ISBN = ISBN
     this.title = title
@@ -33,6 +36,7 @@ class Book {
     this.authors = authors
     this.status === 'Available'
     this.category = category
+    this.year = year
     if (category === 'computer science') {
       this.imageUrl = `${cslogo}`
     }
