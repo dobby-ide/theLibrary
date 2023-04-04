@@ -2,10 +2,11 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { userLoginActions, currentUserActions, RootState } from '../../store'
-import classes from './styling/UserNavigation.module.scss'
+import { currentUserActions } from '../../redux/slices/currentUserSlice'
+import { userLoginActions } from '../../redux/slices/userIsLoggedInSlice'
+import { RootState } from '../../store'
+import classes from './style/UserNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
-import { Root } from 'react-dom/client'
 
 const UserNavigation = () => {
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)

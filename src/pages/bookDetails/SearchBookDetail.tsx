@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 
-import classes from './styling/SearchBookDetail.module.scss'
+import classes from './style/SearchBookDetail.module.scss'
 import Book from '../../model/book'
-import { AuthorBookTable } from './utilComponents/AuthorBookTable'
+import { AuthorBookTable } from '../author/AuthorBookTable'
 import { RootState } from '../../store'
 import { useSelector } from 'react-redux'
 

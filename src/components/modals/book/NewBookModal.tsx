@@ -2,10 +2,10 @@
 import { useReducer } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { bookActions } from '../../../store'
+import { bookActions } from '../../../redux/slices/bookSlice'
 import Book from '../../../model/book'
 import { Authors } from '../../../data/mockData'
-import classes from '../styling/NewBookModal.module.scss'
+import classes from '../style/NewBookModal.module.scss'
 import Author from '../../../model/author'
 
 const initialInputState = {
@@ -51,6 +51,7 @@ const NewBookModal = ({ closeModal }) => {
         )
       )
     )
+    closeModal()
   }
 
   const closingModalHandler = (e) => {
@@ -60,8 +61,6 @@ const NewBookModal = ({ closeModal }) => {
   console.log(inputState)
   return (
     <div className={classes.newBookModal}>
-      <button onClick={closingModalHandler}>X</button>
-      <h2>my modal for new book</h2>
       <div>
         <label>ISBN</label>
         <input type="text" name="ISBN" onChange={(e) => textChangeHandler(e)}></input>

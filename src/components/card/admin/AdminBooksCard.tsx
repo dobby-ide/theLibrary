@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import classes from '../styling/AdminBooksCard.module.scss'
-import { bookActions } from '../../../store'
-import UpdateBookModal from './UpdateBookModal'
+import classes from '../style/AdminBooksCard.module.scss'
+import { bookActions } from '../../../redux/slices/bookSlice'
+import UpdateBookModal from '../../modals/book/UpdateBookModal'
+import { CSSTransition } from 'react-transition-group'
 
 const AdminBookCard = ({
   isbn,
@@ -38,9 +39,14 @@ const AdminBookCard = ({
   return (
     <>
       <div className={classes.updateBookModal}>
-        {modalIsVisible && (
+        <CSSTransition
+          in={modalIsVisible}
+          timeout={3000}
+          classNames="modalNewBook"
+          active
+          unmountOnExit>
           <UpdateBookModal isbn={chosenBook} exit={onClosingModalHandler}></UpdateBookModal>
-        )}
+        </CSSTransition>
       </div>
       <section className={classes.bookCard_container}>
         <div className={classes.singleCard_container} onClick={provaa} key={isbn} id={isbn}>

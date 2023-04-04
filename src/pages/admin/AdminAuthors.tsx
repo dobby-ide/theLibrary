@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store'
-import AdminAuthorsCard from './utilcomponents/AdminAuthorsCard'
-import NewAuthorModal from './utilcomponents/NewAuthorModal'
+import AdminAuthorsCard from '../../components/card/author/AdminAuthorsCard'
+import NewAuthorModal from '../../components/modals/author/NewAuthorModal'
 
 const AdminAuthors = () => {
   const [modalIsVisible, setModalVisible] = useState(false)

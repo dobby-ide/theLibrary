@@ -4,9 +4,9 @@ import { useParams, useLocation } from 'react-router-dom'
 
 import { RootState } from '../../store'
 import UserPage from '../user/UserPage'
-import classes from './Homepage.module.scss'
+import classes from './style/Homepage.module.scss'
 import { useState } from 'react'
-import './Modal.css'
+import './style/Modal.css'
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false)

@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { authorActions, RootState } from '../../../store'
+import { RootState } from '../../../store'
+import { authorActions } from '../../../redux/slices/authorSlice'
 import Author from '../../../model/author'
 import { Button } from '@mantine/core'
 

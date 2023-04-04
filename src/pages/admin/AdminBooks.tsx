@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
 import { RootState } from '../../store'
-import AdminBooksCard from './utilcomponents/AdminBooksCard'
-import NewBookModal from './utilcomponents/NewBookModal'
+import AdminBooksCard from '../../components/card/admin/AdminBooksCard'
+import NewBookModal from '../../components/modals/book/NewBookModal'
 import classes from './styling/AdminBooks.module.scss'
 import './styling/AdminBook.scss'
 
@@ -35,11 +35,11 @@ const AdminBooks = () => {
             classNames="modalNewBook"
             active
             unmountOnExit>
-            <div className="modalNewBook-container">
-              <h2 className="modalF-content__title">Creating a new book mode</h2>
+            <div className="modalNewBook_container">
+              <h2 className="modalF-content__title">new book</h2>
               <NewBookModal closeModal={onClosingModalHandler} />
 
-              <button className="modalF-container_button" onClick={toggleModal}>
+              <button className="modalNewBook_container_button" onClick={toggleModal}>
                 x
               </button>
             </div>

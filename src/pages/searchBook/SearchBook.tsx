@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store'
 
-import BookCard from './utilComponents/BookCard'
+import BookCard from '../../components/card/book/BookCard'
 import Book from '../../model/book'
-import classes from './styling/SearchBook.module.scss'
+import classes from './style/SearchBook.module.scss'
 
 const SearchBook: React.FC = () => {
   const books: Book[] = useSelector((state: RootState) => state.book.Books)

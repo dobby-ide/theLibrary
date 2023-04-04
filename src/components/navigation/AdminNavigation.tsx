@@ -1,8 +1,8 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { adminLoginActions } from '../../store'
-import classes from './styling/AdminNavigation.module.scss'
+import { adminLoginActions } from '../../redux/slices/adminLoginSlice'
+import classes from './style/AdminNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
 const AdminNavigation = () => {

@@ -2,8 +2,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { authorActions } from '../../../store'
-import UpdateAuthorModal from './UpdateAuthorModal'
+import { authorActions } from '../../../redux/slices/authorSlice'
+import UpdateAuthorModal from '../../modals/author/UpdateAuthorModal'
 
 const AdminAuthorsCard: React.FC = ({ authorName }) => {
   const dispatch = useDispatch()

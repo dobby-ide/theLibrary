@@ -4,7 +4,7 @@ import { SetStateAction, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store'
-import ReturnBookModal from '../searchBook/utilComponents/ReturnBookModal'
+import ReturnBookModal from '../../components/modals/book/ReturnBookModal'
 import classes from './styling/ReturnBook.module.scss'
 
 const ReturnBook = () => {

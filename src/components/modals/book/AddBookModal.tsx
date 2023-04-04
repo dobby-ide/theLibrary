@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { bookActions, RootState, userActions } from '../../../store'
-import classes from '../styling/AddBookModal.module.scss'
+import { bookActions } from '../../../redux/slices/bookSlice'
+import { userActions } from '../../../redux/slices/userSlice'
+import { RootState } from '../../../store'
+import classes from '../style/AddBookModal.module.scss'
 
 const AddBookModal = (props: { isbn: number; user: string; exitModal: () => void }) => {
   const dispatch = useDispatch()

@@ -18,9 +18,12 @@ import useForm from './hook/useForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import User from '../../model/user'
-import { currentUserActions, RootState, userActions, userLoginActions } from '../../store'
-import classes from './EntryForm.module.scss'
-import './ModalForm.scss'
+import { currentUserActions } from '../../redux/slices/currentUserSlice'
+import { userActions } from '../../redux/slices/userSlice'
+import { userLoginActions } from '../../redux/slices/userIsLoggedInSlice'
+import { RootState } from '../../store'
+import classes from './style/EntryForm.module.scss'
+import './style/ModalForm.scss'
 
 export function AuthenticationTitle() {
   const navigate = useNavigate()

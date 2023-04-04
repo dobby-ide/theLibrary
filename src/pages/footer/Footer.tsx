@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import classes from './Footer.module.scss'
+import classes from './style/Footer.module.scss'
 import brain from '../../assets/images/brain.svg'
 
 const Footer = () => {

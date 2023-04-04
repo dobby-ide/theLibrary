@@ -1,10 +1,10 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { bookActions } from '../../../store'
+import { bookActions } from '../../../redux/slices/bookSlice'
 import { RootState } from '../../../store'
 import { Authors } from '../../../data/mockData'
-import classes from '../styling/UpdateBookModal.module.scss'
+import classes from '../style/UpdateBookModal.module.scss'
 
 const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
   const dispatch = useDispatch()

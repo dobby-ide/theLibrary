@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState, useEffect } from 'react'
 
-import classes from '../styling/Search.module.scss'
+import classes from './style/Search.module.scss'
 
 const Search = (props: { books: any; back: any; updatedBooks: any }) => {
   const [term, setTerm] = useState('')

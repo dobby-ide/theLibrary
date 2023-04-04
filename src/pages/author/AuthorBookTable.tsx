@@ -1,5 +1,5 @@
 import { createStyles, Table, Progress, Anchor, Text, Group, ScrollArea, rem } from '@mantine/core'
-import Author from '../../../model/author'
+import Author from '../../model/author'
 
 const useStyles = createStyles((theme) => ({
   progressBar: {

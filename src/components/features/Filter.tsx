@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useEffect, useState } from 'react'
 
-import classes from '../styling/Filter.module.scss'
+import classes from './style/Filter.module.scss'
 
 const Filter = (props: { books: []; results: () => void }) => {
   const [categoryChoice, setCategoryChoice] = useState('')

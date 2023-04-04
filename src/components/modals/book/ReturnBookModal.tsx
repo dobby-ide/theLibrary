@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux'
 
-import { userActions, bookActions } from '../../../store'
-import classes from '../styling/ReturnBookModal.module.scss'
+import { userActions } from '../../../redux/slices/userSlice'
+import { bookActions } from '../../../redux/slices/bookSlice'
+import classes from '../style/ReturnBookModal.module.scss'
 
 const ReturnBookModal = (props: { exitModal: any; isbn: string; userId: any }) => {
   const dispatch = useDispatch()

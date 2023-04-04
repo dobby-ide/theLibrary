@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
 import classes from './styling/RootAdminLayout.module.scss'
-import AdminNavigation from '../../pages/mainNavigation/AdminNavigation'
+import AdminNavigation from '../navigation/AdminNavigation'
 import Footer from '../../pages/footer/Footer'
 
 function RootAdminLayout() {

@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-import { adminLoginActions } from '../../store'
-import classes from '../admin/styling/AdminEntryForm.module.scss'
+import { adminLoginActions } from '../../redux/slices/adminLoginSlice'
+import classes from './style/AdminEntryForm.module.scss'
 
 const AdminEntryForm = () => {
   const navigate = useNavigate()

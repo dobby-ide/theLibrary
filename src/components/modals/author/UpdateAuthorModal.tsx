@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { authorActions, RootState } from '../../../store'
+import { RootState } from '../../../store'
+import { authorActions } from '../../../redux/slices/authorSlice'
 
 const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
   const [authorName, setAuthorName] = useState('')
@@ -22,7 +23,7 @@ const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
     dispatch(authorActions.updateAuthor({ name: authorName, index: props.name }))
     props.exit()
   }
-console.log(author[0])
+  console.log(author[0])
   return (
     <div>
       <div>

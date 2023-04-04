@@ -1,19 +1,31 @@
 .modalNewBook_container{
-	 display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+	display: flex;
+	flex-direction: column;
+	 position: fixed;
+	 align-items: stretch;
+	 justify-content: center;
+ border-radius: 10px;;
+  width:380px;
+  height:415px;
+  top:150px;
+  left: 0px;
+  margin:2rem;
+  background-color: rgba(130, 196, 38, 0.5);
+  z-index: 1000;
+  padding:2rem;
+  &_button{
+
+  }
 }
 .modalNewBook-enter {
   opacity: 0;
-  transform: scale(0.5);
+  transform: scaleX(0.5);
 
 }
 
 .modalNewBook-enter-active {
   opacity: 1;
-  transform: scale(1);
+  transform: scaleX(1);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
 }
@@ -24,12 +36,12 @@
 /* Modal Exit Animation */
 .modalNewBook-exit {
   opacity: 1;
-  transform: scale(1);
+  transform: scaleX(1);
 
 }
 
 .modalNewBook-exit-active {
   opacity: 0;
-  transform: scale(2);
+  transform: scaleX(.2);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }

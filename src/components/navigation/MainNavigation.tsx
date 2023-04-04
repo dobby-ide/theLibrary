@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { userActions } from '../../store'
+import { userActions } from '../../redux/slices/userSlice'
 import User from '../../model/user'
-import { userLoginActions } from '../../store'
-import { currentUserActions } from '../../store'
+import { userLoginActions } from '../../redux/slices/userIsLoggedInSlice'
+import { currentUserActions } from '../../redux/slices/currentUserSlice'
 import { signInWithGoogle } from '../../../firebase.config'
-import classes from './styling/MainNavigation.module.scss'
+import classes from './style/MainNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
 const MainNavigation = () => {
