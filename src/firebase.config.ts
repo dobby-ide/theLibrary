@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, signInWithPopup } from 'firebase/auth'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { getAnalytics } from 'firebase/analytics'
-import { firebaseConfig } from './src/fireconfig'
+import { firebaseConfig } from './fireconfig'
 console.log(firebaseConfig)
 const key = import.meta.env.VITE_SOME_KEY
 console.log(key)

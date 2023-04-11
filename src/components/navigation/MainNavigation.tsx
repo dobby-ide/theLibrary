@@ -6,7 +6,7 @@ import { userActions } from '../../redux/slices/userSlice'
 import User from '../../model/user'
 import { userLoginActions } from '../../redux/slices/userIsLoggedInSlice'
 import { currentUserActions } from '../../redux/slices/currentUserSlice'
-import { signInWithGoogle } from '../../../firebase.config'
+import { signInWithGoogle } from '../../firebase.config'
 import classes from './style/MainNavigation.module.scss'
 import logo from '../../assets/images/svg_bookshelf.svg'
 
