@@ -2,8 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { getAuth, signInWithPopup } from 'firebase/auth'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { getAnalytics } from 'firebase/analytics'
-import { firebaseConfig } from './fireconfig'
-console.log(firebaseConfig)
+
 const key = import.meta.env.VITE_SOME_KEY
 console.log(key)
 // TODO: Add SDKs for Firebase products that you want to use
@@ -13,6 +12,15 @@ console.log(key)
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 // Initialize Firebase
+export const firebaseConfig = {
+  apiKey: 'AIzaSyB5ZV7JfeKbTh6Ulo2zNe6Y8by4fuWbWcM',
+  authDomain: 'fs14-frontend-1ee53.firebaseapp.com',
+  projectId: 'fs14-frontend-1ee53',
+  storageBucket: 'fs14-frontend-1ee53.appspot.com',
+  messagingSenderId: '776144953616',
+  appId: '1:776144953616:web:941b2ecd995ec72d404595',
+  measurementId: 'G-CX344GZFC1'
+}
 export const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
