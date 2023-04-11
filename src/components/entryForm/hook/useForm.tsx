@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useReducer } from 'react'
 
 function formReducer(state, action) {

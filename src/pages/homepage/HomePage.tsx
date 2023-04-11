@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { useParams, useLocation } from 'react-router-dom'

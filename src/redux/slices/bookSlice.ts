@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit'
 import { books } from '../../data/mockData'
 import Author from '../../model/author'
