@@ -54,6 +54,7 @@ const AdminBooks = () => {
           return (
             // eslint-disable-next-line react/jsx-key
             <AdminBooksCard
+              key={book.ISBN}
               isbn={book.ISBN}
               title={book.title}
               description={book.description}

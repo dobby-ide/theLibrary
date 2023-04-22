@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit'
+import { Action } from '@remix-run/router'
 import { books } from '../../data/mockData'
 import Author from '../../model/author'
 import Book from '../../model/book'
@@ -47,6 +48,30 @@ export const booksSlice = createSlice({
         newData.category
       )
       state.Books[index] = updateBook
+    },
+    updateAllBooksWithAuthor(state, action) {
+      console.log(action.payload.oldAuthor)
+
+      const updateAuthorName = state.Books.map((book) => {
+        const authorToUpdate = book.authors.find(
+          (author) => author.name === action.payload.oldAuthor
+        )
+        if (authorToUpdate) {
+          return {
+            ...book,
+            authors: book.authors.map((author) => {
+              if (author === authorToUpdate) {
+                return { ...author, name: action.payload.newAuthor }
+              }
+              return author
+            })
+          }
+        }
+        return book
+      })
+
+      console.log(updateAuthorName)
+      state.Books = updateAuthorName
     },
     removeBook(state, action) {
       const newState = state.Books.filter((book) => String(book.ISBN) !== action.payload)

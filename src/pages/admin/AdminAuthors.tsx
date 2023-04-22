@@ -18,19 +18,19 @@ const AdminAuthors = () => {
   }
 
   const authors = useSelector((state: RootState) => state.author.Authors)
-
-  return (
+console.log(authors)
+return (
+  <div>
+    <h1>I am admin authors page</h1>
     <div>
-      <h1>I am admin authors page</h1>
-      <div>
-        <button onClick={openModal}>add Author</button>
-      </div>
-      {authors.map((author) => {
-        // eslint-disable-next-line react/jsx-key
-        return <AdminAuthorsCard authorName={author.name} />
-      })}
-      {modalIsVisible && <NewAuthorModal closeModal={closeModal} />}
+      <button onClick={openModal}>add Author</button>
     </div>
-  )
+    {authors.map((author) => {
+      // eslint-disable-next-line react/jsx-key
+      return <AdminAuthorsCard authorName={author.name} key={author.name} />
+    })}
+    {modalIsVisible && <NewAuthorModal closeModal={closeModal} />}
+  </div>
+)
 }
 export default AdminAuthors

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from '../../../store'
 import { authorActions } from '../../../redux/slices/authorSlice'
+import { bookActions } from '../../../redux/slices/bookSlice'
 
 const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
   const [authorName, setAuthorName] = useState('')
@@ -21,9 +22,10 @@ const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
 
   const onUpdateAuthorHandler = () => {
     dispatch(authorActions.updateAuthor({ name: authorName, index: props.name }))
+    dispatch(bookActions.updateAllBooksWithAuthor({ oldAuthor: props.name, newAuthor: authorName }))
     props.exit()
   }
-  console.log(author[0])
+  // console.log(author[0])
   return (
     <div>
       <div>

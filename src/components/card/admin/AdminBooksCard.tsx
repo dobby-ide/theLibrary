@@ -55,7 +55,9 @@ const AdminBookCard = ({
           <div className={classes.singleCard_containerDescr}>{description}</div>
           <div className={classes.singleCard_containerPublisher}>{publisher}</div>
           {authors.map((author) => (
-            <div className={classes.singleCard_containerAuthors}>{author.name}</div>
+            <div key={author.name} className={classes.singleCard_containerAuthors}>
+              {author.name}
+            </div>
           ))}
           <div
             className={

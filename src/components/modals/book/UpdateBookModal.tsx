@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { bookActions } from '../../../redux/slices/bookSlice'
 import { RootState } from '../../../store'
-import { Authors } from '../../../data/mockData'
 import classes from '../style/UpdateBookModal.module.scss'
 
 const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
   const dispatch = useDispatch()
-
+  const authors = useSelector((state: RootState) => state.author.Authors)
   const book = useSelector((state: RootState) =>
     state.book.Books.filter((book) => String(book.ISBN) === props.isbn)
   )
@@ -90,7 +89,7 @@ const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
         <label>authors</label>
         <select name="authors" onChange={(e) => textChangeHandler(e)}>
           <option value={inputState.authors}>{inputState.authors}</option>
-          {Authors.map((author) => {
+          {authors.map((author) => {
             return (
               <option key={author.name} value={author.name}>
                 {author.name}
