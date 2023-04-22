@@ -20,11 +20,14 @@
 	visibility:hidden;
 	position:absolute;
 	top:32px;
+	left:140px;
 	opacity:.2;
 	color:black;
 
 }
 .input::placeholder{
+	position:absolute;
+
 	color:rgb(191, 191, 191);
 }
 .input:focus{
@@ -33,7 +36,7 @@
 
 }
 	.input:focus + .label{
-	transform:translateY(-30px);
+	transform:translateX(120px);
 	visibility:visible;
 	transition: 1s all;
 	opacity:.5;

@@ -9,7 +9,7 @@ import classes from '../style/BookCard.module.scss'
 import Search from '../../features/Search'
 import Filter from '../../features/Filter'
 import Book from '../../../model/book'
-import { books } from '../../../data/mockData'
+
 import { Card } from '@mantine/core'
 
 const BookCard = (props: { books: Book[] }) => {
@@ -43,7 +43,7 @@ const BookCard = (props: { books: Book[] }) => {
   return (
     <section className={classes.bookCard_container}>
       <header className={classes.bookCard_container_header}>
-        <Search books={books} updatedBooks={result} back={onSearchingInputs} />
+        <Search books={props.books} updatedBooks={result} back={onSearchingInputs} />
         <Filter results={onCategorySelectHandler} books={props.books}></Filter>
       </header>
       <div className={classes.renderedBooks}>
