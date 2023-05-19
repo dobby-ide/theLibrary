@@ -12,13 +12,14 @@ import {
   Button
 } from '@mantine/core'
 import { CSSTransition } from 'react-transition-group'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import useForm from './hook/useForm'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import User from '../../model/user'
+import { fetchUsers } from '../../redux/slices/userSlice'
 import { currentUserActions } from '../../redux/slices/currentUserSlice'
 import { userActions } from '../../redux/slices/userSlice'
 import { userLoginActions } from '../../redux/slices/userIsLoggedInSlice'
@@ -36,9 +37,19 @@ export function AuthenticationTitle() {
   const [switchForm, setRegisterNewUser] = useState(false)
   const user = useSelector((state: RootState) => state.user)
 
+  useEffect(() => {
+    dispatch(fetchUsers('users'))
+  }, [dispatch])
+  if (status === 'loading') {
+    return <div>Loading...</div>
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>
+  }
+
   const [formData, handleChange, resetForm] = useForm({
     name: '',
-    lastName: '',
     email: '',
     password: ''
   })
@@ -48,19 +59,21 @@ export function AuthenticationTitle() {
     for (let iterator in user.Users) {
       console.log(user.Users[iterator])
       if (
-        user.Users[iterator].firstName === formData.name &&
-        user.Users[iterator].lastName === formData.lastName &&
+        user.Users[iterator].name === formData.name &&
+        user.Users[iterator].email === formData.email &&
         user.Users[iterator].password === formData.password
       ) {
         console.log('loggedin')
         dispatch(userLoginActions.loginAccepted())
         dispatch(
           currentUserActions.saveUser({
-            name: user.Users[iterator].firstName,
-            email: user.Users[iterator].email
+            name: user.Users[iterator].name,
+            email: user.Users[iterator].email,
+            id: user.Users[iterator].id,
+            numberOfBooks: user.Users[iterator].books
           })
         )
-        navigate('/user', { state: user.Users[iterator].firstName })
+        navigate('/user', { state: user.Users[iterator].name })
         console.log(loggedIn)
       }
     }
@@ -102,7 +115,7 @@ export function AuthenticationTitle() {
   const createAccount = () => {
     setRegisterNewUser(!switchForm)
   }
-  console.log(formData)
+  console.log(user)
   return (
     <Container size={420} my={40}>
       <Title

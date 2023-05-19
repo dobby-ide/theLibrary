@@ -10,12 +10,7 @@ import logo from '../../assets/images/svg_bookshelf.svg'
 
 const UserNavigation = () => {
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
-  const userEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
-  const users = useSelector((state: RootState) => state.user.Users)
-  const [currentUser] = users.filter((user) => user.email === userEmail)
-  console.log(currentUser)
-  const location = useLocation()
-  let user = location.state
+  const numberOfBooks = useSelector((state: RootState) => state.currentUser.currentUserBooks)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -44,7 +39,7 @@ const UserNavigation = () => {
           <li>
             <button onClick={backToMainPage}>LogOut {userName}</button>
           </li>
-          <li>{currentUser.booksBorrowed.length > 0 && <Link to="/user/return">return</Link>}</li>
+          <li>{numberOfBooks.length > 0 && <Link to="/user/return">return</Link>}</li>
           <li>
             <Link to="/user/search">search</Link>
           </li>

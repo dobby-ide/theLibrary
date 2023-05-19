@@ -5,14 +5,16 @@ import classes from './style/Filter.module.scss'
 
 const Filter = (props: { books: []; results: () => void }) => {
   const [categoryChoice, setCategoryChoice] = useState('')
-  const categories = props.books.map((book) => book.category)
+  const categories = props.books.map((book) => book.category.categoryName)
   const uniqueCategories = [...new Set(categories)]
 
   const onSelectCategory = (e) => {
     setCategoryChoice(e.target.value)
   }
 
-  const filteredResults = props.books.filter((book) => book.category === categoryChoice)
+  const filteredResults = props.books.filter(
+    (book) => book.category.categoryName === categoryChoice
+  )
 
   useEffect(() => {
     categoryChoice !== '' ? props.results(filteredResults) : props.results(props.books)

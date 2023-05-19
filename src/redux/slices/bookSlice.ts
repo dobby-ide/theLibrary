@@ -1,14 +1,23 @@
 // @ts-nocheck
-import { createSlice } from '@reduxjs/toolkit'
-import { Action } from '@remix-run/router'
-import { books } from '../../data/mockData'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import Author from '../../model/author'
 import Book from '../../model/book'
 
+import axios from 'axios'
+
+const apiUrl = 'http://localhost:8080/api/v1'
+
 const initialBooksState = {
-  Books: books,
+  Books: [],
   currentBook: {}
 }
+
+export const fetchBooks = createAsyncThunk('books/fetchBooks', async (endpoint) => {
+  const url = `${apiUrl}/${endpoint}`
+  const response = await axios.get(url)
+  console.log(response.data)
+  return response.data
+})
 
 export const booksSlice = createSlice({
   name: 'books',
@@ -77,7 +86,21 @@ export const booksSlice = createSlice({
       const newState = state.Books.filter((book) => String(book.ISBN) !== action.payload)
       state.Books = newState
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBooks.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchBooks.fulfilled, (state, action) => {
+        state.Books = action.payload
+        state.status = 'succeeded'
+      })
+      .addCase(fetchBooks.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
   }
 })
 
-export const bookActions = booksSlice.actions
+export const bookActions = { ...booksSlice.actions, fetchBooks }

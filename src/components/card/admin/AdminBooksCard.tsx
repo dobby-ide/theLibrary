@@ -59,14 +59,7 @@ const AdminBookCard = ({
               {author.name}
             </div>
           ))}
-          <div
-            className={
-              status === 'Available'
-                ? classes.singleCard_containerStatusAvailable
-                : classes.singleCard_containerStatus
-            }>
-            {status}
-          </div>
+
           <div>{borrowerId}</div>
           <div>{returnDate}</div>
           <button onClick={onDeleteBookHandler}>delete book</button>

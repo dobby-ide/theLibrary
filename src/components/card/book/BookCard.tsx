@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -13,22 +13,22 @@ import Book from '../../../model/book'
 import { Card } from '@mantine/core'
 
 const BookCard = (props: { books: Book[] }) => {
-  const [result, setResult] = useState(Array<Item>)
-  const [bookIsbn, setBookIsbn] = useState()
+  const [result, setResult] = useState(Array<Book>)
+  const [bookId, setBookId] = useState()
   const [openModal, setOpenModal] = useState(false)
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
   const userEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
-  const userId = useSelector((state: RootState) =>
-    state.user.Users.filter((user) => String(user.email) === userEmail)
-  )
+  const userId = useSelector((state: RootState) => state.currentUser.currentUserId)
+
+  console.log('userId is', userId)
 
   const exitModal = () => {
     setOpenModal(false)
   }
 
   const borrowingBookHandler = (e: { target: { parentElement: { id: any } } }) => {
-    const isbn = e.target.parentElement.id
-    setBookIsbn(isbn)
+    const chosenBookId = e.target.parentElement.id
+    setBookId(chosenBookId)
     setOpenModal(true)
   }
 
@@ -48,17 +48,17 @@ const BookCard = (props: { books: Book[] }) => {
       </header>
       <div className={classes.renderedBooks}>
         {openModal && (
-          <AddBookModal exitModal={exitModal} user={userId[0]} isbn={bookIsbn}></AddBookModal>
+          <AddBookModal exitModal={exitModal} userId={userId} bookId={bookId}></AddBookModal>
         )}
         {result.map((book) => {
           return !userName ? (
-            <Card shadow="sm" padding="lg" key={book.ISBN} className={classes.singleCard_container}>
-              <Link to={`./${book.ISBN}`} relative="path">
+            <Card shadow="sm" padding="lg" key={book.id} className={classes.singleCard_container}>
+              <Link to={`./${book.id}`} relative="path">
                 <div className={classes.bookTitle}>{book.title}</div>
 
                 <div className={classes.bookDescr}>{book.description}</div>
 
-                <div className={`${book.status} === "Available" && ${classes.bookStatusAvailable}`}>
+                <div className={`${book.quantity} > 0 && ${classes.bookStatusAvailable}`}>
                   {book.status}
                 </div>
                 {book.returnDate && (
@@ -67,8 +67,8 @@ const BookCard = (props: { books: Book[] }) => {
 
                 {book.authors.map((author) => {
                   return (
-                    <div className={classes.bookAuthors} key={author.name}>
-                      Author: {author.name}
+                    <div className={classes.bookAuthors} key={author.authorName}>
+                      Author: {author.authorName}
                     </div>
                   )
                 })}
@@ -83,9 +83,9 @@ const BookCard = (props: { books: Book[] }) => {
               shadow="sm"
               padding="lg"
               className={classes.singleCard_container}
-              key={book.ISBN}
-              id={book.ISBN}>
-              {book.status === 'Available' && (
+              key={book.id}
+              id={book.id}>
+              {book.quantity > 0 && (
                 <button className={classes.borrowingBook_button} onClick={borrowingBookHandler}>
                   borrow
                 </button>
@@ -100,8 +100,8 @@ const BookCard = (props: { books: Book[] }) => {
                   <p>{book.description}</p>
                 </div>
 
-                <div className={`${book.status} === "Available" && ${classes.bookStatusAvailable}`}>
-                  <p>{book.status}</p>
+                <div className={`${book.quantity} > 0 && ${classes.bookStatusAvailable}`}>
+                  {book.quantity > 0 && <p> available</p>}
                 </div>
                 {book.returnDate && (
                   <div className={classes.bookReturnDate}>Return day: {book.returnDate}</div>
@@ -109,8 +109,8 @@ const BookCard = (props: { books: Book[] }) => {
 
                 {book.authors.map((author) => {
                   return (
-                    <div className={classes.bookAuthors} key={author.name}>
-                      {author.name}
+                    <div className={classes.bookAuthors} key={author.authorName}>
+                      {author.authorName}
                     </div>
                   )
                 })}

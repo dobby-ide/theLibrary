@@ -1,40 +1,73 @@
 // @ts-nocheck
-import { createSlice } from '@reduxjs/toolkit'
-import { Users } from '../../data/mockData'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+
+const apiUrl = 'http://localhost:8080/api/v1'
+
 const initialUsersState = {
-  Users: Users
+  Users: []
 }
+
+export const borrowBook = createAsyncThunk('user/borrowBook', async (endpoint) => {
+  const url = `${apiUrl}/${endpoint}`
+  const response = await axios.post(url)
+  console.log(response.data)
+  return response.data
+})
+
+export const returnBook = createAsyncThunk('user/returnBook', async (endpoint) => {
+  const url = `${apiUrl}/${endpoint}`
+  const response = await axios.post(url)
+  return response.data
+})
+
+export const fetchUsers = createAsyncThunk('user/fetchUsers', async (endpoint) => {
+  const url = `${apiUrl}/${endpoint}`
+  const response = await axios.get(url)
+  console.log(response.data)
+  return response.data
+})
+
 export const userSlice = createSlice({
   name: 'users',
   initialState: initialUsersState,
-  reducers: {
-    addUser(state, action) {
-      state.Users = [...state.Users, action.payload]
-    },
-    cart(state, action) {
-      const newState = state.Users
 
-      let index = state.Users.findIndex((user) => String(user.id) === action.payload.userId.id)
-      console.log(newState[index])
-      let finalObj = {}
-      const t = action.payload.book //[{}]
-      for (let i = 0; i < t.length; i++) {
-        Object.assign(finalObj, t[i])
-      }
-      newState[index].booksBorrowed.push(finalObj)
-      state.Users = newState
-    },
-    returnBook(state, action) {
-      const userEmail = action.payload.user
-      const index = state.Users.findIndex((user) => String(user.email) === userEmail)
-      const newState = state.Users
-      const returnBookIsbn = action.payload.isbn
-      let bookIndex = newState[index].booksBorrowed.findIndex(
-        (bookIndex) => String(bookIndex.ISBN) === returnBookIsbn
-      )
-      newState[index].booksBorrowed.splice(bookIndex, 1)
-      console.log(newState[index].booksBorrowed)
-    }
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.Users = action.payload
+        state.status = 'succeeded'
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+      .addCase(borrowBook.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(borrowBook.fulfilled, (state, action) => {
+        state.Users = action.payload
+        state.status = 'succeeded'
+      })
+      .addCase(borrowBook.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+      .addCase(returnBook.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(returnBook.fulfilled, (state, action) => {
+        state.Users = action.payload
+        state.status = 'succeeded'
+      })
+      .addCase(returnBook.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
   }
 })
-export const userActions = userSlice.actions
+
+export const userActions = { ...userSlice.actions, fetchUsers, borrowBook, returnBook }

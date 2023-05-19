@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialUserLogin = {
   currentUserName: '',
-  currentUserEmail: ''
+  currentUserEmail: '',
+  currentUserId: '',
+  currentUserBooks: ''
 }
 export const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -11,10 +13,19 @@ export const currentUserSlice = createSlice({
     saveUser(state, action) {
       state.currentUserName = action.payload.name
       state.currentUserEmail = action.payload.email
+      state.currentUserId = action.payload.id
+      state.currentUserBooks = action.payload.numberOfBooks
+    },
+    returnCurrentUserBook(state, action) {
+      state.currentUserBooks = action.payload.numberOfBooks
+
+      console.log(state.currentUserBooks)
     },
     logout(state) {
       state.currentUserName = ''
       state.currentUserEmail = ''
+      state.currentUserId = ''
+      state.currentUserBooks = ''
     }
   }
 })

@@ -1,19 +1,33 @@
+// @ts-nocheck
 import { useDispatch } from 'react-redux'
 
-import { userActions } from '../../../redux/slices/userSlice'
-import { bookActions } from '../../../redux/slices/bookSlice'
+import { useSelector } from 'react-redux'
+
+import { returnBook } from '../../../redux/slices/userSlice'
+
 import classes from '../style/ReturnBookModal.module.scss'
 
 const ReturnBookModal = (props: { exitModal: any; isbn: string; userId: any }) => {
+  console.log('inside returnBookModal ', props.isbn, 'and user id is ', props.userId)
   const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.user)
+  const currentUserEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
 
   const exit = () => {
+    for (let i in user.Users) {
+      console.log(user.Users[i].name)
+      if (user.Users[i].email === currentUserEmail) {
+        dispatch(currentUserActions.returnCurrentUserBook({ numberOfBooks: user.Users[i].books }))
+      }
+    }
     props.exitModal()
   }
 
   const onBookReturn = () => {
-    dispatch(userActions.returnBook({ user: props.userId, isbn: props.isbn }))
-    dispatch(bookActions.returnBook({ isbn: props.isbn }))
+    dispatch(returnBook(`users/${props.userId}/return-book/${props.isbn}`))
+
+    //dispatch(currentUserActions.returnCurrentUserBook())
+
     props.exitModal()
   }
 

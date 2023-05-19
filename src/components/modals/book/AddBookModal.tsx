@@ -1,26 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { borrowBook } from '../../../redux/slices/userSlice'
 
-import { bookActions } from '../../../redux/slices/bookSlice'
-import { userActions } from '../../../redux/slices/userSlice'
-import { RootState } from '../../../store'
 import classes from '../style/AddBookModal.module.scss'
 
-const AddBookModal = (props: { isbn: number; user: string; exitModal: () => void }) => {
+const AddBookModal = (props: { bookId: number; userId: string; exitModal: () => void }) => {
   const dispatch = useDispatch()
-  const borrowedBook = useSelector((state: RootState) =>
-    state.book.Books.filter((book) => String(book.ISBN) === String(props.isbn))
-  )
 
   const confirmBook = () => {
-    dispatch(bookActions.borrowBook({ isbn: props.isbn, userId: props.user }))
-    dispatch(userActions.cart({ userId: props.user, book: borrowedBook }))
+    dispatch(borrowBook(`users/${props.userId}/borrow-book/${props.bookId}`))
     props.exitModal()
   }
 
   const exit = () => {
     props.exitModal()
   }
-
+  console.log(props.bookId)
   return (
     <div className={classes.addBookModal}>
       <div className={classes.text}>
