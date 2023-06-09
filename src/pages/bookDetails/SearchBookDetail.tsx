@@ -8,10 +8,15 @@ import { useSelector } from 'react-redux'
 
 const SearchBookDetail = (props: { book: Book[] }) => {
   const params = useParams()
+  console.log(params.bookID)
   const [filteredResult] = props.book.filter((book) => String(book.id) === String(params.bookID))
+  console.log(filteredResult)
   const books = useSelector((state: RootState) => state.book.Books)
+  console.log(books)
   const author = filteredResult.authors[0].authorName
-  const booksOfAuthor = books.filter((book) => book.authors[0].authorName === author)
+  const booksOfAuthor = books.filter(
+    (book) => book.authors[0] && book.authors[0].authorName === author
+  )
   const data = booksOfAuthor.map((book) => {
     const { title, authors, ISBN } = book
     return {

@@ -8,20 +8,25 @@ import { fetchUsers } from '../../redux/slices/userSlice'
 
 const UserPage = () => {
   const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.currentUser.currentUserEmail)
-  const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
-
-  const fullUser = useSelector((state: RootState) =>
-    state.user.Users.filter((currUser) => String(currUser.email) === user)
-  )
   useEffect(() => {
+    console.log('useEffect inside UserPage')
     dispatch(fetchUsers('users'))
-  }, [dispatch])
+  }, [])
+  const email = useSelector((state: RootState) => state.currentUser.currentUserEmail)
+  const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
+  const users = useSelector((state: RootState) => state.user.Users)
+  const fullUser = useSelector((state: RootState) =>
+    state.user.Users.filter((currUser) => String(currUser.email) === email)
+  )
+  console.log(fullUser)
+
+  console.log(users)
+
   return (
     <div className={classes.userPageContainer}>
       <h2>Welcome {userName}</h2>
       <div className={classes.bookToReturnContainer}>
-        {fullUser[0].books.length > 0 && <h2>Current books on loan:</h2>}
+        {/* {fullUser[0].books.length > 0 && <h2>Current books on loan:</h2>}
         {fullUser[0].books.length > 0 ? (
           fullUser[0].books.map((book) => (
             <div className={classes.bookToReturn} key={book.ISBN} id={book.ISBN}>
@@ -32,7 +37,7 @@ const UserPage = () => {
           ))
         ) : (
           <p>no books to return</p>
-        )}
+        )} */}
       </div>
     </div>
   )

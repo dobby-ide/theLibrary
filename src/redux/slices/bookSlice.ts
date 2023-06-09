@@ -28,16 +28,20 @@ export const updateBookToServer = createAsyncThunk(
 export const removeBookFromServer = createAsyncThunk('books/removeBook', async (endpoint) => {
   const url = `${apiUrl}/${endpoint}`
   const response = await axios.delete(url)
+
   return response.data
 })
 
 export const addBookToServer = createAsyncThunk('books/addBook', async ({ endpoint, newBook }) => {
+  console.log('addBookToServer is called')
   const url = `${apiUrl}/${endpoint}/`
+  console.log(url)
   const response = await axios.post(url, newBook, {
     headers: {
-      'Content-type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
+
   return response.data
 })
 

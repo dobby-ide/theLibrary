@@ -16,11 +16,11 @@ const BookCard = (props: { books: Book[] }) => {
   const [result, setResult] = useState(Array<Book>)
   const [bookId, setBookId] = useState()
   const [openModal, setOpenModal] = useState(false)
-  const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
+  const userEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
 
   const userId = useSelector((state: RootState) => state.currentUser.currentUserId)
 
-  console.log('userId is', userId)
+  console.log('user email  is', userEmail)
 
   const exitModal = () => {
     setOpenModal(false)
@@ -51,7 +51,7 @@ const BookCard = (props: { books: Book[] }) => {
           <AddBookModal exitModal={exitModal} userId={userId} bookId={bookId}></AddBookModal>
         )}
         {result.map((book) => {
-          return !userName ? (
+          return !userEmail ? (
             <Card shadow="sm" padding="lg" key={book.id} className={classes.singleCard_container}>
               <Link to={`./${book.id}`} relative="path">
                 <div className={classes.bookTitle}>{book.title}</div>
@@ -91,7 +91,7 @@ const BookCard = (props: { books: Book[] }) => {
                 </button>
               )}
 
-              <Link to={`./${book.ISBN}`} relative="path">
+              <Link to={`./${book.id}`} relative="path">
                 <div className={classes.bookTitle}>
                   <p>{book.title}</p>
                 </div>
