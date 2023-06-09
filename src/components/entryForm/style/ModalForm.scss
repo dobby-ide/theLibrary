@@ -1,0 +1,84 @@
+.modalF-container {
+  position: fixed;
+ border-radius: 30px;;
+  width:380px;
+  height:415px;
+  top:260px;
+  margin-left:4px;
+  background-color: rgba(130, 196, 38, 0.5);
+  z-index: 1000;
+  &_button{
+    position:absolute;
+    top:0;
+    right:0;
+  }
+
+}
+
+/* Modal Content */
+.modalF-content {
+  display:flex;
+  flex-direction: column;
+  align-items: center;;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgb(44, 163, 8);
+  transition: all 3s;
+  &__title{
+    color:rgb(28, 103, 15);
+    font-size: 20px;;
+  }
+  &__name{
+    font-size: 12px;
+
+    &::before{
+      content:"name: ";
+      color:rgb(25, 164, 0);
+    }
+  }
+  &__lastName{
+    font-size: 12px;
+    &::before{
+      content:"lastname: ";
+      color:rgb(25, 164, 0);
+    }
+  }
+  &__email{
+    font-size: 12px;
+    &::before{
+      content:"email: ";
+      color:rgb(25, 164, 0);
+    }
+  }
+}
+
+/* Modal Enter Animation */
+.modalF-enter {
+  opacity: 0;
+  transform: scale(0.8);
+
+}
+
+.modalF-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1000ms, transform 1500ms;
+
+}
+.modalF-enter-done{
+  opacity:1;
+}
+
+/* Modal Exit Animation */
+.modalF-exit {
+  opacity: 1;
+  transform: scale(1);
+
+}
+
+.modalF-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1000ms, transform 500ms;
+}

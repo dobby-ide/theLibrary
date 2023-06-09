@@ -1,0 +1,88 @@
+.bookDetail_container{
+
+	margin: 0 auto;
+
+	top:10rem;
+	display:flex;
+	flex-direction: column;
+	justify-content:space-around;
+	align-items: center;
+	width:70vw;
+
+
+
+
+}
+.moreAboutTheAuthor{
+
+}
+.card{
+	position:relative;
+	border-radius: 100%;
+
+	height:35rem;
+	width:35rem;
+
+
+
+	&__side{
+
+		&:hover &card__side_front{
+		transform:rotateY(-180deg);
+	}
+	&:hover &card__side_back{
+		transform:rotateY(-180deg);
+	}
+
+	}
+	&:hover &__side_front{
+		transform:rotateY(180deg);
+	}
+	&:hover &__side_back{
+		transform:rotateY(0);
+	}
+}
+.card__side_front{
+	opacity: .4;
+	position:absolute;
+	top:0;
+	border:1px solid rgb(92, 83, 225);
+	border-radius: 100%;
+	overflow:hidden;
+	height:35rem;
+	width:35rem;
+	padding:7rem;
+	background-color: rgb(230, 230, 230);
+	color: rgb(35, 35, 35);
+	transition:all 2s;
+	perspective:150rem;
+	-moz-perspective: 150rem;
+}
+.card__side_back{
+	backface-visibility: hidden;
+	position:absolute;
+		top:0;
+	border:1px solid rgb(126, 18, 18);
+	border-radius: 100%;
+	overflow:hidden;
+	height:35rem;
+	width:35rem;
+	padding:7rem;
+	background-color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
+	transition:all 2s;
+	perspective:150rem;
+	-moz-perspective: 150rem;
+	transform: rotateY(-180deg);
+}
+.authorImage{
+	position:absolute;
+	top:0;
+}
+.nophotoAvailable{
+	color:black;
+	position:absolute;
+	top:50%;
+	left:37%;
+	font-size: 20px;
+}

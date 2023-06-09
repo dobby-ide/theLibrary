@@ -1,0 +1,21 @@
+.input {
+  transform: translateY(8px);
+  box-shadow: 0 1rem 3rem rgba(black, 0.5);
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  background-color: yellowgreen;
+  border: none;
+  border-bottom: 3px solid;
+  width: 90%;
+  height: 2rem;
+  display: block;
+  &::placeholder {
+    color: rgba(121, 161, 12, 0.69);
+  }
+}
+.input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(rgb(240, 240, 240), 0.2);
+  border-bottom: 3px solid rgba(rgb(195, 195, 11), 0.8);
+}
