@@ -8,10 +8,10 @@ import { useSelector } from 'react-redux'
 
 const SearchBookDetail = (props: { book: Book[] }) => {
   const params = useParams()
-  const [filteredResult] = props.book.filter((book) => String(book.ISBN) === String(params.bookID))
+  const [filteredResult] = props.book.filter((book) => String(book.id) === String(params.bookID))
   const books = useSelector((state: RootState) => state.book.Books)
-  const author = filteredResult.authors[0].name
-  const booksOfAuthor = books.filter((book) => book.authors[0].name === author)
+  const author = filteredResult.authors[0].authorName
+  const booksOfAuthor = books.filter((book) => book.authors[0].authorName === author)
   const data = booksOfAuthor.map((book) => {
     const { title, authors, ISBN } = book
     return {
@@ -36,12 +36,12 @@ const SearchBookDetail = (props: { book: Book[] }) => {
           <p>{filteredResult.description}</p>
           <p>
             {filteredResult.authors.map((author) => (
-              <span>{author.name} </span>
+              <span>{author.authorName} </span>
             ))}
           </p>
-          <p>{filteredResult.category}</p>
+
           <p>{filteredResult.publisher}</p>
-          <p>{filteredResult.status}</p>
+          {filteredResult.quantity > 0 && <p>{filteredResult.quantity} available</p>}
         </div>
         <div className={classes.card__side_back}>
           {filteredResult.authors[0].photoUrl ? (

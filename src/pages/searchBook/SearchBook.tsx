@@ -11,13 +11,15 @@ import { fetchBooks } from '../../redux/slices/bookSlice'
 
 const SearchBook: React.FC = () => {
   const dispatch = useDispatch()
-  const books: Book[] = useSelector((state: RootState) => state.book.Books)
+
   const status = useSelector((state: RootState) => state.book.status)
   const error = useSelector((state: RootState) => state.book.error)
 
   useEffect(() => {
     dispatch(fetchBooks('books'))
   }, [dispatch])
+
+  const books: Book[] = useSelector((state: RootState) => state.book.Books)
 
   if (status === 'loading') {
     return <div>Loading...</div>

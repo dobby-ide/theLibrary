@@ -5,17 +5,45 @@ import Book from '../../model/book'
 
 import axios from 'axios'
 
-const apiUrl = 'http://localhost:8080/api/v1'
+const apiUrl = 'http://127.0.0.1:8080/api/v1'
 
 const initialBooksState = {
   Books: [],
   currentBook: {}
 }
 
-export const fetchBooks = createAsyncThunk('books/fetchBooks', async (endpoint) => {
+export const updateBookToServer = createAsyncThunk(
+  'books/updateBook',
+  async ({ endpoint, updatedBook }) => {
+    const url = `${apiUrl}/${endpoint}`
+    const response = await axios.put(url, updatedBook, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    return response.status
+  }
+)
+
+export const removeBookFromServer = createAsyncThunk('books/removeBook', async (endpoint) => {
+  const url = `${apiUrl}/${endpoint}`
+  const response = await axios.delete(url)
+  return response.data
+})
+
+export const addBookToServer = createAsyncThunk('books/addBook', async ({ endpoint, newBook }) => {
+  const url = `${apiUrl}/${endpoint}/`
+  const response = await axios.post(url, newBook, {
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+  return response.data
+})
+
+export const fetchBooks = createAsyncThunk('books/fetch', async (endpoint) => {
   const url = `${apiUrl}/${endpoint}`
   const response = await axios.get(url)
-  console.log(response.data)
   return response.data
 })
 
@@ -25,6 +53,7 @@ export const booksSlice = createSlice({
   reducers: {
     addNewBook(state, action) {
       state.Books = [...state.Books, action.payload]
+      console.log(state.Books)
     },
     borrowBook(state, action) {
       console.log(action)
@@ -45,9 +74,17 @@ export const booksSlice = createSlice({
     },
     updateBookInfo(state, action) {
       console.log(action.payload)
-      const index = state.Books.findIndex((obj) => String(obj.ISBN) === String(action.payload.isbn))
+      const index = state.Books.findIndex((obj) => String(obj.id) === String(action.payload.id))
       const newData = action.payload.inputState
-      const newAuthor = new Author(action.payload.inputState.authors)
+      const newAuthorId = action.payload.inputState.authors
+      const newAuthor = state.Books.map((book) => {
+        const authorToUpdate = book.authors.find((author) => String(author.id) === newAuthorId)
+        if (authorToUpdate) {
+          console.log(authorToUpdate.authorName)
+          return authorToUpdate.authorName
+        }
+      })
+      console.log(newAuthor)
       const updateBook = new Book(
         newData.ISBN,
         newData.title,
@@ -83,7 +120,7 @@ export const booksSlice = createSlice({
       state.Books = updateAuthorName
     },
     removeBook(state, action) {
-      const newState = state.Books.filter((book) => String(book.ISBN) !== action.payload)
+      const newState = state.Books.filter((book) => String(book.id) !== action.payload)
       state.Books = newState
     }
   },
@@ -103,4 +140,9 @@ export const booksSlice = createSlice({
   }
 })
 
-export const bookActions = { ...booksSlice.actions, fetchBooks }
+export const bookActions = {
+  ...booksSlice.actions,
+  fetchBooks,
+  addBookToServer,
+  removeBookFromServer
+}

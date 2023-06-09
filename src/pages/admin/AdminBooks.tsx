@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useState, useEffect, memo, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-
+import { fetchBooks } from '../../redux/slices/bookSlice'
 import { RootState } from '../../store'
 import AdminBooksCard from '../../components/card/admin/AdminBooksCard'
 import NewBookModal from '../../components/modals/book/NewBookModal'
@@ -10,22 +10,42 @@ import classes from './styling/AdminBooks.module.scss'
 import './styling/AdminBook.scss'
 
 const AdminBooks = () => {
+  console.log('AdminBooks renders')
+  const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false)
+  const [fetchingBooks, setFetchingBooks] = useState(false)
+  const books = useSelector((state: RootState) => state.book.Books)
+  useEffect(() => {
+    setFetchingBooks(true)
+    dispatch(fetchBooks('books')).finally(() => {
+      setFetchingBooks(false)
+    })
+  }, [dispatch])
 
-  const addNewBook = (e: { preventDefault: () => void }) => {
+  const addNewBook = useCallback((e) => {
     e.preventDefault()
     setOpenModal(true)
-  }
+  }, [])
 
-  const onClosingModalHandler = () => {
-    setOpenModal(false)
-  }
+  const onClosingModalHandler = useCallback(() => {
+    setFetchingBooks(true)
+    dispatch(fetchBooks('books')).finally(() => {
+      setFetchingBooks(false)
+      setOpenModal(false)
+    })
+  }, [dispatch])
 
-  const books = useSelector((state: RootState) => state.book.Books)
+  const toggleModal = useCallback(() => {
+    setFetchingBooks(true)
+    dispatch(fetchBooks('books/fetch')).finally(() => {
+      setFetchingBooks(false)
+      setOpenModal((prevState) => !prevState)
+    })
+  }, [dispatch])
+  if (fetchingBooks) {
+    return <div>Loading...</div>
+  }
   console.log(books)
-  const toggleModal = () => {
-    setOpenModal(!openModal)
-  }
   return (
     <section className={classes.adminBookContainer}>
       <div className={classes.AdminPanel}>
@@ -53,9 +73,11 @@ const AdminBooks = () => {
         {books.map((book) => {
           return (
             // eslint-disable-next-line react/jsx-key
+
             <AdminBooksCard
-              key={book.ISBN}
-              isbn={book.ISBN}
+              key={book.id}
+              id={book.id}
+              isbn={book.isbn}
               title={book.title}
               description={book.description}
               publisher={book.publisher}
@@ -70,4 +92,4 @@ const AdminBooks = () => {
     </section>
   )
 }
-export default AdminBooks
+export default memo(AdminBooks)

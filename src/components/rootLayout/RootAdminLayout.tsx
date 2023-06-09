@@ -6,13 +6,17 @@ import Footer from '../../pages/footer/Footer'
 
 function RootAdminLayout() {
   return (
-    <section className={classes.rootAdminContainer}>
-      <AdminNavigation />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </section>
+    <>
+      <section className={classes.rootAdminContainer}>
+        <AdminNavigation />
+        <main>
+          <Outlet />
+        </main>
+      </section>
+      <section className={classes.rootAdminFooter}>
+        <Footer />
+      </section>
+    </>
   )
 }
 export default RootAdminLayout

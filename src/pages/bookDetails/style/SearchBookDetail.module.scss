@@ -1,13 +1,15 @@
 .bookDetail_container{
-	position:absolute;
-	left:50%;
-	transform:translateX(-50%);
+
+	margin: 0 auto;
+
 	top:10rem;
 	display:flex;
 	flex-direction: column;
 	justify-content:space-around;
 	align-items: center;
-	width:75vw;
+	width:70vw;
+
+
 
 
 }

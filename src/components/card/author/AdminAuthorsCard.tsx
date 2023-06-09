@@ -1,35 +1,43 @@
 // @ts-nocheck
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-
-import { authorActions } from '../../../redux/slices/authorSlice'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store'
+import { authorActions, fetchAuthors } from '../../../redux/slices/authorSlice'
 import UpdateAuthorModal from '../../modals/author/UpdateAuthorModal'
 
-const AdminAuthorsCard: React.FC = ({ authorName }) => {
+import { deleteAuthor } from '../../../redux/slices/authorSlice'
+
+const AdminAuthorsCard: React.FC = ({ authorId, authorName, dateOfBirth, books }) => {
   const dispatch = useDispatch()
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [chosenAuthor, setChosenAuthor] = useState()
 
   const openModal = () => {
     setModalIsVisible(true)
-    setChosenAuthor(authorName)
+    setChosenAuthor(authorId)
   }
 
   const closeModal = () => {
     setModalIsVisible(false)
-    setChosenAuthor(authorName)
+    setChosenAuthor(authorId)
   }
 
-  const onDeleteBookHandler = (e: { target: { parentElement: { id: any } } }) => {
+  const onDeleteAuthorHandler = (e: { target: { parentElement: { id: any } } }) => {
+    dispatch(deleteAuthor(`authors/${e.target.parentElement.id}`))
     dispatch(authorActions.removeAuthor(e.target.parentElement.id))
   }
 
+  useEffect(() => {
+    dispatch(fetchAuthors('authors'))
+  }, [dispatch])
   return (
-    <div id={authorName}>
+    <div id={authorId} key={authorId}>
       <div>{authorName}</div>
-      <button onClick={onDeleteBookHandler}>remove</button>
+      <div>{dateOfBirth}</div>
+      {books != null && books.map((book) => <div key={book.id}>{book.title}</div>)}
+      <button onClick={onDeleteAuthorHandler}>remove</button>
       <button onClick={openModal}>modify</button>
-      <div>{modalIsVisible && <UpdateAuthorModal exit={closeModal} name={chosenAuthor} />}</div>
+      <div>{modalIsVisible && <UpdateAuthorModal exit={closeModal} authorId={chosenAuthor} />}</div>
     </div>
   )
 }

@@ -17,7 +17,7 @@ const BookCard = (props: { books: Book[] }) => {
   const [bookId, setBookId] = useState()
   const [openModal, setOpenModal] = useState(false)
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
-  const userEmail = useSelector((state: RootState) => state.currentUser.currentUserEmail)
+
   const userId = useSelector((state: RootState) => state.currentUser.currentUserId)
 
   console.log('userId is', userId)
@@ -59,7 +59,7 @@ const BookCard = (props: { books: Book[] }) => {
                 <div className={classes.bookDescr}>{book.description}</div>
 
                 <div className={`${book.quantity} > 0 && ${classes.bookStatusAvailable}`}>
-                  {book.status}
+                  {book.quantity}
                 </div>
                 {book.returnDate && (
                   <div className={classes.bookReturnData}>Return day: {book.returnDate}</div>
@@ -101,7 +101,7 @@ const BookCard = (props: { books: Book[] }) => {
                 </div>
 
                 <div className={`${book.quantity} > 0 && ${classes.bookStatusAvailable}`}>
-                  {book.quantity > 0 && <p> available</p>}
+                  {book.quantity > 0 && <p> available {book.quantity} copy(es)</p>}
                 </div>
                 {book.returnDate && (
                   <div className={classes.bookReturnDate}>Return day: {book.returnDate}</div>

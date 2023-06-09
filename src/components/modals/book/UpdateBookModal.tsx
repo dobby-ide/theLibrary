@@ -1,23 +1,23 @@
 import React, { useReducer } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { bookActions } from '../../../redux/slices/bookSlice'
+import { bookActions, fetchBooks, updateBookToServer } from '../../../redux/slices/bookSlice'
 import { RootState } from '../../../store'
 import classes from '../style/UpdateBookModal.module.scss'
 
-const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
+const UpdateBookModal = (props: { exit: () => void; bookId: String }) => {
   const dispatch = useDispatch()
   const authors = useSelector((state: RootState) => state.author.Authors)
   const book = useSelector((state: RootState) =>
-    state.book.Books.filter((book) => String(book.ISBN) === props.isbn)
+    state.book.Books.filter((book) => String(book.id) === props.bookId)
   )
 
   const initialInputState = {
     title: book[0].title,
     description: book[0].description,
-    ISBN: book[0].ISBN,
+    ISBN: book[0].isbn,
     publisher: book[0].publisher,
-    authors: book[0].authors[0].name
+    authors: book[0].authors.authorName
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,11 +43,25 @@ const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
   }
 
   const exitModal = () => {
+    dispatch(fetchBooks('books'))
     props.exit()
   }
 
   const onUpdateBookHandler = () => {
-    dispatch(bookActions.updateBookInfo({ isbn: props.isbn, inputState: inputState }))
+    console.log(inputState.authors)
+    dispatch(
+      updateBookToServer({
+        endpoint: `books/${props.bookId}`,
+        updatedBook: {
+          ISBN: inputState.ISBN,
+          title: inputState.title,
+          description: inputState.description,
+          authors: inputState.authors,
+          publisher: inputState.publisher
+        }
+      })
+    )
+    dispatch(bookActions.updateBookInfo({ id: props.bookId, inputState: inputState }))
     props.exit()
   }
   console.log(inputState)
@@ -91,8 +105,8 @@ const UpdateBookModal = (props: { exit: () => void; isbn: {} }) => {
           <option value={inputState.authors}>{inputState.authors}</option>
           {authors.map((author) => {
             return (
-              <option key={author.name} value={author.name}>
-                {author.name}
+              <option key={author.authorName} value={author.id}>
+                {author.authorName}
               </option>
             )
           })}

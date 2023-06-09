@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { addAuthorToServer } from '../../../redux/slices/authorSlice'
 import { RootState } from '../../../store'
 import { authorActions } from '../../../redux/slices/authorSlice'
 import Author from '../../../model/author'
@@ -11,9 +11,17 @@ const NewAuthorModal = ({ closeModal }) => {
   const author = useSelector((state: RootState) => state.author.Authors)
   const dispatch = useDispatch()
   const [inputName, setInputName] = useState('')
-
+  useEffect(() => {}, [author, dispatch])
   const onSubmitNewAuthor = (e) => {
     e.preventDefault()
+    dispatch(
+      addAuthorToServer({
+        endpoint: 'authors',
+        newAuthor: {
+          authorName: inputName
+        }
+      })
+    )
     dispatch(authorActions.addAuthor(new Author(inputName)))
     closeModal()
   }

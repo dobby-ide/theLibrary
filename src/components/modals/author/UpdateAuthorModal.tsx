@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../store'
 import { authorActions } from '../../../redux/slices/authorSlice'
 import { bookActions } from '../../../redux/slices/bookSlice'
+import { updateAuthorToServer } from '../../../redux/slices/authorSlice'
 
-const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
+const UpdateAuthorModal = (props: { exit: () => void; authorId: string }) => {
   const [authorName, setAuthorName] = useState('')
   const dispatch = useDispatch()
   const author = useSelector((state: RootState) =>
-    state.author.Authors.filter((author) => String(author.name) === props.name)
+    state.author.Authors.filter((author) => String(author.id) === props.authorId)
   )
 
   const exitModal = () => {
@@ -21,16 +22,28 @@ const UpdateAuthorModal = (props: { exit: () => void; name: string }) => {
   }
 
   const onUpdateAuthorHandler = () => {
-    dispatch(authorActions.updateAuthor({ name: authorName, index: props.name }))
-    dispatch(bookActions.updateAllBooksWithAuthor({ oldAuthor: props.name, newAuthor: authorName }))
+    dispatch(
+      updateAuthorToServer({
+        endpoint: `authors/${props.authorId}`,
+        updatedAuthor: { authorName: authorName }
+      })
+    )
+    dispatch(authorActions.updateAuthor({ name: authorName, index: props.authorId }))
+    dispatch(
+      bookActions.updateAllBooksWithAuthor({ oldAuthor: props.authorId, newAuthor: authorName })
+    )
     props.exit()
   }
-  // console.log(author[0])
+  console.log(author)
   return (
     <div>
       <div>
         <label htmlFor="">name and surname</label>
-        <input type="text" onChange={(e) => textChangeHandler(e)} placeholder={author[0].name} />
+        <input
+          type="text"
+          onChange={(e) => textChangeHandler(e)}
+          placeholder={author[0].authorName}
+        />
       </div>
       <button onClick={exitModal}>cancel</button>
       <button onClick={onUpdateAuthorHandler}>update</button>

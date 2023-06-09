@@ -8,6 +8,7 @@ const AddBookModal = (props: { bookId: number; userId: string; exitModal: () => 
 
   const confirmBook = () => {
     dispatch(borrowBook(`users/${props.userId}/borrow-book/${props.bookId}`))
+
     props.exitModal()
   }
 
