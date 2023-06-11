@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useParams } from 'react-router-dom'
 
 import classes from './style/SearchBookDetail.module.scss'
