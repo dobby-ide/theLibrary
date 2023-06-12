@@ -1,10 +1,9 @@
 // @ts-nocheck
-
+import url from '../../apiurl'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
 import axios from 'axios'
 
-const apiUrl = 'http://127.0.0.1:8080/api/v1'
+const apiUrl = url
 
 const initialAuthorsState = {
   Authors: []

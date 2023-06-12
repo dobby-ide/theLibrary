@@ -59,7 +59,9 @@ const MainNavigation = () => {
           </li>
           <li>
             <Link to="/browsebook">
-              <button onClick={authenticate}>SIGN IN WITH GOOGLE</button>
+              <button onClick={() => console.log('signinwith google not available yet')}>
+                SIGN IN WITH GOOGLE
+              </button>
             </Link>
           </li>
         </ul>

@@ -7,6 +7,7 @@ import axios from 'axios'
 import { adminLoginActions } from '../../redux/slices/adminLoginSlice'
 import classes from './style/AdminEntryForm.module.scss'
 axios.defaults.withCredentials = true
+import url from '../../apiurl'
 const AdminEntryForm = () => {
   const [register, setRegister] = useState(false)
   const navigate = useNavigate()
@@ -34,7 +35,7 @@ const AdminEntryForm = () => {
     formData.append('email', email)
     formData.append('role', 'admin')
     try {
-      var session_url = 'http://localhost:8080/register'
+      var session_url = `${url}/register`
       axios
         .post(session_url, formData)
         .then(function (response) {
@@ -57,7 +58,7 @@ const AdminEntryForm = () => {
     e.preventDefault()
 
     try {
-      var session_url = 'http://127.0.0.1:8080/userLogin'
+      var session_url = `${url}/userLogin`
 
       var basicAuth = 'Basic ' + window.btoa(userName + ':' + password)
       // var basicAuth = 'Basic ' + window.btoa(username + ':' + password)

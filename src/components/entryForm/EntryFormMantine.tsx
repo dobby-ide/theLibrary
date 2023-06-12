@@ -12,10 +12,8 @@ import {
   Button
 } from '@mantine/core'
 import { CSSTransition } from 'react-transition-group'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
-
-import useForm from './hook/useForm'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -25,8 +23,10 @@ import { currentUserActions } from '../../redux/slices/currentUserSlice'
 import { userActions } from '../../redux/slices/userSlice'
 import { userLoginActions } from '../../redux/slices/userIsLoggedInSlice'
 import { RootState } from '../../store'
+import url from '../../apiurl'
 import classes from './style/EntryForm.module.scss'
 import './style/ModalForm.scss'
+import useForm from './hook/useForm'
 
 export function AuthenticationTitle() {
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ export function AuthenticationTitle() {
     console.log('inside handleSubmit--FOR LOGGING-EntryFormMantine')
 
     try {
-      var session_url = 'http://127.0.0.1:8080/userLogin'
+      var session_url = `${url}/userLogin`
 
       var basicAuth = 'Basic ' + window.btoa(formData.email + ':' + formData.password)
       axios
@@ -89,28 +89,7 @@ export function AuthenticationTitle() {
     } catch (err) {
       console.log(err)
     }
-    // for (let iterator in user.Users) {
-    //   console.log(user.Users[iterator])
-    //   if (
-    //     user.Users[iterator].name === formData.name &&
-    //     user.Users[iterator].email === formData.email &&
-    //     user.Users[iterator].password === formData.password
-    //   ) {
-    //     console.log('loggedin')
-    //     dispatch(userLoginActions.loginAccepted())
-    //     dispatch(
-    //       currentUserActions.saveUser({
-    //         name: user.Users[iterator].name,
-    //         email: user.Users[iterator].email,
-    //         id: user.Users[iterator].id,
-    //         numberOfBooks: user.Users[iterator].books
-    //       })
-    //     )
-    //     navigate('/user', { state: user.Users[iterator].name })
-    //     console.log(loggedIn)
-    //   }
-    // }
-    //CREATES LOGIC TO CHECK IF name surname and email are inside the user
+
     console.log(fullUser)
   }
 
