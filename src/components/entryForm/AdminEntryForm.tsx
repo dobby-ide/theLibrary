@@ -35,7 +35,7 @@ const AdminEntryForm = () => {
     formData.append('email', email)
     formData.append('role', 'admin')
     try {
-      var session_url = `http://10.0.0.142:8080/register`
+      var session_url = `http://54.172.142.62:8080/register`
       axios
         .post(session_url, formData)
         .then(function (response) {
@@ -58,11 +58,10 @@ const AdminEntryForm = () => {
     e.preventDefault()
 
     try {
-      var session_url = `http://10.0.0.142:8080/userLogin`
+      var session_url = `http://54.172.142.62:8080/userLogin`
 
       var basicAuth = 'Basic ' + window.btoa(userName + ':' + password)
-      // var basicAuth = 'Basic ' + window.btoa(username + ':' + password)
-      // console.log(basicAuth)
+
       axios
         .post(session_url, null, {
           headers: {

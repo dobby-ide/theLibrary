@@ -13,7 +13,7 @@ const AdminAuthors = () => {
   const authors = useSelector((state: RootState) => state.author.Authors)
 
   useEffect(() => {
-    dispatch(fetchAuthors('authors'))
+    dispatch(fetchAuthors('api/v1/authors'))
   }, [dispatch])
 
   if (status === 'loading') {
@@ -29,7 +29,7 @@ const AdminAuthors = () => {
   }
 
   const closeModal = () => {
-    dispatch(fetchAuthors('authors'))
+    dispatch(fetchAuthors('api/v1/authors'))
     setModalVisible(false)
   }
 

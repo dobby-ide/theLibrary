@@ -10,15 +10,13 @@ const UserPage = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     console.log('useEffect inside UserPage')
-    dispatch(fetchUsers('users'))
+    dispatch(fetchUsers('api/v1/users'))
   }, [])
   const email = useSelector((state: RootState) => state.currentUser.currentUserEmail)
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)
   const users = useSelector((state: RootState) => state.user.Users)
-  const fullUser = useSelector((state: RootState) =>
-    state.user.Users.filter((currUser) => String(currUser.email) === email)
-  )
-  console.log(fullUser)
+
+
 
   console.log(users)
 

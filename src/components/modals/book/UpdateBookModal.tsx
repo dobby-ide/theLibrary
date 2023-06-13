@@ -44,7 +44,7 @@ const UpdateBookModal = (props: { exit: () => void; bookId: String }) => {
   }
 
   const exitModal = () => {
-    dispatch(fetchBooks('books'))
+    dispatch(fetchBooks('api/v1/books'))
     props.exit()
   }
 
@@ -52,7 +52,7 @@ const UpdateBookModal = (props: { exit: () => void; bookId: String }) => {
     console.log(inputState.authors)
     dispatch(
       updateBookToServer({
-        endpoint: `books/${props.bookId}`,
+        endpoint: `api/v1/books/${props.bookId}`,
         updatedBook: {
           ISBN: inputState.ISBN,
           title: inputState.title,

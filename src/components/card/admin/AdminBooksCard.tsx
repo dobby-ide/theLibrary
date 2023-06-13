@@ -19,24 +19,24 @@ const AdminBookCard = ({
 }) => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchBooks('books'))
+    dispatch(fetchBooks('api/v1/books'))
   }, [dispatch])
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [chosenBook, setChosenBook] = useState()
 
   const onClosingModalHandler = () => {
-    dispatch(fetchBooks('books'))
+    dispatch(fetchBooks('api/v1/books'))
     setModalIsVisible(false)
   }
 
   const onUpdateBookHandler = (e) => {
-    dispatch(fetchBooks('books'))
+    dispatch(fetchBooks('api/v1/books'))
     setModalIsVisible(true)
     setChosenBook(e.target.parentElement.id)
   }
 
   const onDeleteBookHandler = (e) => {
-    dispatch(removeBookFromServer(`books/${e.target.parentElement.id}`))
+    dispatch(removeBookFromServer(`api/v1/books/${e.target.parentElement.id}`))
     dispatch(bookActions.removeBook(e.target.parentElement.id))
   }
 

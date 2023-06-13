@@ -41,7 +41,7 @@ const NewBookModal = ({ closeModal }) => {
   const onSubmitNewBookHandler = () => {
     dispatch(
       addBookToServer({
-        endpoint: 'books',
+        endpoint: 'api/v1/books',
         newBook: {
           title: inputState.title,
           ISBN: inputState.ISBN,

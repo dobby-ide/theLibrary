@@ -14,7 +14,7 @@ import { fetchUsers } from '../../redux/slices/userSlice'
 const UserNavigation = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchUsers('users'))
+    dispatch(fetchUsers('api/v1/users'))
   }, [dispatch])
   const email = useSelector((state: RootState) => state.currentUser.currentUserEmail)
   const userName = useSelector((state: RootState) => state.currentUser.currentUserName)

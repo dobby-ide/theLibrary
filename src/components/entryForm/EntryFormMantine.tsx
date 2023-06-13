@@ -69,7 +69,7 @@ export function AuthenticationTitle() {
           console.log('Authenticated')
           console.log(response.data)
           console.log(response)
-          dispatch(fetchUsers('users'))
+          dispatch(fetchUsers('api/v1/users'))
           dispatch(userLoginActions.loginAccepted())
           dispatch(
             currentUserActions.saveUser({

@@ -13,7 +13,7 @@ const ReturnBook = () => {
   let booksOfCurrentUser = useSelector((state: RootState) => state.currentUser.currentUserBooks)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchUsers('users'))
+    dispatch(fetchUsers('api/v1/users'))
   }, [dispatch])
 
   const [modalOpen, setModalOpen] = useState(false)

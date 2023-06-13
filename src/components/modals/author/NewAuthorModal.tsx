@@ -16,7 +16,7 @@ const NewAuthorModal = ({ closeModal }) => {
     e.preventDefault()
     dispatch(
       addAuthorToServer({
-        endpoint: 'authors',
+        endpoint: 'api/v1/authors',
         newAuthor: {
           authorName: inputName
         }

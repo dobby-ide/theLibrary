@@ -17,7 +17,7 @@ const AdminBooks = () => {
   const books = useSelector((state: RootState) => state.book.Books)
   useEffect(() => {
     setFetchingBooks(true)
-    dispatch(fetchBooks('books')).finally(() => {
+    dispatch(fetchBooks('api/v1/books')).finally(() => {
       setFetchingBooks(false)
     })
   }, [dispatch])
@@ -29,7 +29,7 @@ const AdminBooks = () => {
 
   const onClosingModalHandler = useCallback(() => {
     setFetchingBooks(true)
-    dispatch(fetchBooks('books')).finally(() => {
+    dispatch(fetchBooks('api/v1/books')).finally(() => {
       setFetchingBooks(false)
       setOpenModal(false)
     })
@@ -37,7 +37,7 @@ const AdminBooks = () => {
 
   const toggleModal = useCallback(() => {
     setFetchingBooks(true)
-    dispatch(fetchBooks('books/fetch')).finally(() => {
+    dispatch(fetchBooks('api/v1/books')).finally(() => {
       setFetchingBooks(false)
       setOpenModal((prevState) => !prevState)
     })

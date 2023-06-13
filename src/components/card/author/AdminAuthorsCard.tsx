@@ -23,12 +23,12 @@ const AdminAuthorsCard: React.FC = ({ authorId, authorName, dateOfBirth, books }
   }
 
   const onDeleteAuthorHandler = (e: { target: { parentElement: { id: any } } }) => {
-    dispatch(deleteAuthor(`authors/${e.target.parentElement.id}`))
+    dispatch(deleteAuthor(`api/v1/authors/${e.target.parentElement.id}`))
     dispatch(authorActions.removeAuthor(e.target.parentElement.id))
   }
 
   useEffect(() => {
-    dispatch(fetchAuthors('authors'))
+    dispatch(fetchAuthors('api/v1/authors'))
   }, [dispatch])
   return (
     <div id={authorId} key={authorId}>

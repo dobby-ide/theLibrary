@@ -24,7 +24,7 @@ const ReturnBookModal = (props: { exitModal: any; isbn: string; userId: any }) =
   }
 
   const onBookReturn = () => {
-    dispatch(returnBook(`users/${props.userId}/return-book/${props.isbn}`))
+    dispatch(returnBook(`api/v1/users/${props.userId}/return-book/${props.isbn}`))
 
     //dispatch(currentUserActions.returnCurrentUserBook())
 

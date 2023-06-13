@@ -25,7 +25,7 @@ const UpdateAuthorModal = (props: { exit: () => void; authorId: string }) => {
   const onUpdateAuthorHandler = () => {
     dispatch(
       updateAuthorToServer({
-        endpoint: `authors/${props.authorId}`,
+        endpoint: `api/v1/authors/${props.authorId}`,
         updatedAuthor: { authorName: authorName }
       })
     )

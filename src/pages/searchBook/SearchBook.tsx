@@ -16,7 +16,7 @@ const SearchBook: React.FC = () => {
   const error = useSelector((state: RootState) => state.book.error)
 
   useEffect(() => {
-    dispatch(fetchBooks('books'))
+    dispatch(fetchBooks('api/v1/books'))
   }, [dispatch])
 
   const books: Book[] = useSelector((state: RootState) => state.book.Books)
