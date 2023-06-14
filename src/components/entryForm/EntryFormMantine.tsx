@@ -95,18 +95,49 @@ export function AuthenticationTitle() {
 
   const handleRegistration = (event: any) => {
     event.preventDefault()
-    if (user.Users.some((user) => user.email === formData.email)) {
-      setOkRegistration(false)
-      setEmailAlreadyExist(true)
-    } else {
-      dispatch(
-        userActions.addUser(
-          new User(formData.name!, formData.lastName!, formData.email!, formData.password!)
-        )
-      )
-      setOkRegistration(true)
-      setIsModalOn(true)
-    }
+    const formDataSave = new URLSearchParams()
+    formDataSave.append('username', formData.name)
+    formDataSave.append('password', formData.password)
+    formDataSave.append('email', formData.email)
+    formDataSave.append('role', 'user')
+    try {
+      var session_url = `${url}/register`
+      axios
+        .post(session_url, formDataSave)
+        .then(function (response) {
+          console.log('registered to db')
+          console.log(response.data)
+          setIsModalOn(true)
+          dispatch(
+            userActions.addUser(
+              new User(formData.name!, formData.lastName!, formData.email!, formData.password!)
+            )
+          )
+          setOkRegistration(true)
+
+          // if (id === '112233') {
+          //   dispatch(adminLoginActions.loginAccepted())
+          //   navigate('/admin')
+          // }
+        })
+        .catch(function (error) {
+          console.log(error)
+          console.log('Error on Authentication')
+        })
+    } catch {}
+
+    // if (user.Users.some((user) => user.email === formData.email)) {
+    //   setOkRegistration(false)
+    //   setEmailAlreadyExist(true)
+    // } else {
+    //   dispatch(
+    //     userActions.addUser(
+    //       new User(formData.name!, formData.lastName!, formData.email!, formData.password!)
+    //     )
+    //   )
+    //   setOkRegistration(true)
+    //   setIsModalOn(true)
+    // }
   }
   const toggleModal = () => {
     setIsModalOn(!isModalOn)
@@ -154,7 +185,7 @@ export function AuthenticationTitle() {
           label="Name"
           name="name"
           value={formData.name}
-          placeholder="you@mantine.dev"
+          placeholder="name"
           required
           onChange={handleChange}
         />
@@ -162,7 +193,7 @@ export function AuthenticationTitle() {
           label="Surname"
           name="lastName"
           value={formData.lastName}
-          placeholder="you@mantine.dev"
+          placeholder="last name"
           required
           onChange={handleChange}
         />
@@ -172,7 +203,7 @@ export function AuthenticationTitle() {
             label="Email"
             name="email"
             value={formData.email}
-            placeholder="you@mantine.dev"
+            placeholder="email"
             required
             onChange={handleChange}
           />
@@ -183,7 +214,7 @@ export function AuthenticationTitle() {
             label="Email already exist"
             name="email"
             value={formData.email}
-            placeholder="you@mantine.dev"
+            placeholder="email"
             required
             onChange={handleChange}
           />

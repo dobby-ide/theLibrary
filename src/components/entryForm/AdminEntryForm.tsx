@@ -6,9 +6,11 @@ import axios from 'axios'
 
 import { adminLoginActions } from '../../redux/slices/adminLoginSlice'
 import classes from './style/AdminEntryForm.module.scss'
+import url from '../../apiurl'
 axios.defaults.withCredentials = true
 
 const AdminEntryForm = () => {
+  const [invalidAdmin, setInvalidAdmin] = useState(false)
   const [register, setRegister] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -35,7 +37,7 @@ const AdminEntryForm = () => {
     formData.append('email', email)
     formData.append('role', 'admin')
     try {
-      var session_url = `http://54.172.142.62:8080/register`
+      var session_url = `${url}/register`
       axios
         .post(session_url, formData)
         .then(function (response) {
@@ -58,7 +60,7 @@ const AdminEntryForm = () => {
     e.preventDefault()
 
     try {
-      var session_url = `http://54.172.142.62:8080/userLogin`
+      var session_url = `${url}/userLogin`
 
       var basicAuth = 'Basic ' + window.btoa(userName + ':' + password)
 
@@ -72,11 +74,12 @@ const AdminEntryForm = () => {
         .then(function (response) {
           console.log('Authenticated')
           console.log(response.data)
-          console.log(response)
-          // if (id === '112233') {
-          dispatch(adminLoginActions.loginAccepted())
-          navigate('/admin')
-          // }
+          if (response.data.role === 'admin') {
+            dispatch(adminLoginActions.loginAccepted())
+            navigate('/admin')
+          } else {
+            setInvalidAdmin(true)
+          }
         })
         .catch(function (error) {
           console.log(error)
@@ -148,6 +151,7 @@ const AdminEntryForm = () => {
               <button className={classes.signinButton} onClick={loginHandler}>
                 login
               </button>
+              {invalidAdmin && <p>invalid admin</p>}
             </div>
           </form>
         )}

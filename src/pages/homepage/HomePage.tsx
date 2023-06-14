@@ -20,18 +20,20 @@ const HomePage = () => {
   return (
     <section className={classes.homepage_container}>
       <div className={classes.homepage_right}>
-        <h2>Library management system</h2>
+        <h2 className="library-name">|| IALI Library || </h2>
         {state && <p>Successfully registered</p>}
-        <button onClick={toggleModal}>your informations</button>
+        <button onClick={toggleModal}>here is your information</button>
         <CSSTransition in={showModal} timeout={3000} classNames="modal" active unmountOnExit>
           <div className="modal-container">
             <div>
-              <div className="modal-content">NAME: {state.name}</div>
-              <div className="modal-content">SURNAME: {state.lastName}</div>
-              <div className="modal-content">PASSWORD: {state.password}</div>
+              <div className="modal-content">name: {state.name}</div>
+              <div className="modal-content">surname: {state.lastName}</div>
+              <div className="modal-content">password: {state.password}</div>
               <div className="modal-content">{state.email}</div>
             </div>
-            <button onClick={toggleModal}>Close Modal</button>
+            <button className="modal-closeButton" onClick={toggleModal}>
+              Close Window
+            </button>
           </div>
         </CSSTransition>
       </div>
