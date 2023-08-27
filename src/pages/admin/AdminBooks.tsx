@@ -70,24 +70,25 @@ const AdminBooks = () => {
         </div>
       </div>
       <div className={classes.AdminBookCard_container}>
-        {books.map((book) => {
-          return (
-            // eslint-disable-next-line react/jsx-key
+        {books[0] &&
+          books.map((book) => {
+            return (
+              // eslint-disable-next-line react/jsx-key
 
-            <AdminBooksCard
-              key={book.id}
-              id={book.id}
-              isbn={book.isbn}
-              title={book.title}
-              description={book.description}
-              publisher={book.publisher}
-              authors={book.authors}
-              status={book.status}
-              borrowerId={book.borrowerId}
-              returnDate={book.returnDate}
-            />
-          )
-        })}
+              <AdminBooksCard
+                key={book.id}
+                id={book.id}
+                isbn={book.isbn}
+                title={book.title}
+                description={book.description}
+                publisher={book.publisher}
+                authors={book.authors}
+                status={book.status}
+                borrowerId={book.borrowerId}
+                returnDate={book.returnDate}
+              />
+            )
+          })}
       </div>
     </section>
   )
