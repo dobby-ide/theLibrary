@@ -65,15 +65,20 @@ const AdminEntryForm = () => {
       var basicAuth = 'Basic ' + window.btoa(userName + ':' + password)
 
       axios
-        .post(session_url, null, {
-          headers: {
-            Authorization: basicAuth,
-            'Content-Type': 'application/json'
+        .post(
+          session_url,
+          null,
+
+          {
+            headers: {
+              Authorization: basicAuth,
+              'Content-Type': 'application/json'
+            }
           }
-        })
+        )
         .then(function (response) {
           console.log('Authenticated')
-          console.log(response.data)
+          console.log('response.data is: ', response.data)
           if (response.data.role === 'admin') {
             dispatch(adminLoginActions.loginAccepted())
             navigate('/admin')
@@ -83,6 +88,7 @@ const AdminEntryForm = () => {
         })
         .catch(function (error) {
           console.log(error)
+          console.log()
           console.log('Error on Authentication')
         })
     } catch {}
@@ -91,8 +97,10 @@ const AdminEntryForm = () => {
   return (
     <>
       <div className={classes.adminFormContainer}>
-        <button onClick={() => setRegister(true)}>Register</button> or{' '}
-        <button onClick={() => setRegister(false)}>Login</button>
+        <div className={classes.buttonContainer}>
+          <button onClick={() => setRegister(true)}>Register</button> or{' '}
+          <button onClick={() => setRegister(false)}>Login</button>
+        </div>
         {register ? (
           <form className={classes.adminForm}>
             <div className={classes.inputContainer}>
@@ -109,7 +117,7 @@ const AdminEntryForm = () => {
                 className={classes.input}
                 onChange={emailHandler}
                 placeholder="email"></input>
-              <label id="lab" className={classes.label}>
+              <label id="lab" className={classes.label2}>
                 email
               </label>
               <input
@@ -117,7 +125,7 @@ const AdminEntryForm = () => {
                 className={classes.input}
                 onChange={passwordHandler}
                 placeholder="password"></input>
-              <label id="lab" className={classes.label}>
+              <label id="lab" className={classes.label3}>
                 password
               </label>
             </div>
@@ -143,7 +151,7 @@ const AdminEntryForm = () => {
                 className={classes.input}
                 onChange={passwordHandler}
                 placeholder="password"></input>
-              <label id="lab" className={classes.label}>
+              <label id="lab" className={classes.label4}>
                 password
               </label>
             </div>

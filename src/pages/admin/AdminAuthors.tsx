@@ -6,6 +6,7 @@ import { RootState } from '../../store'
 import AdminAuthorsCard from '../../components/card/author/AdminAuthorsCard'
 import NewAuthorModal from '../../components/modals/author/NewAuthorModal'
 import { fetchAuthors } from '../../redux/slices/authorSlice'
+import classes from '../admin/styling/AdminAuthors.module.scss'
 
 const AdminAuthors = () => {
   const dispatch = useDispatch()
@@ -34,10 +35,11 @@ const AdminAuthors = () => {
   }
 
   return (
-    <div>
-      <h1>I am admin authors page</h1>
+    <div className={classes.adminAuthorCards_container}>
       <div>
-        <button onClick={openModal}>add Author</button>
+        <button className={classes.addAuthor_button} onClick={openModal}>
+          add Author
+        </button>
       </div>
       {authors.map((author) => {
         // eslint-disable-next-line react/jsx-key

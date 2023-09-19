@@ -54,8 +54,8 @@ const AdminBookCard = ({
       </div>
       <section className={classes.bookCard_container}>
         <div className={classes.singleCard_container} key={id} id={id}>
-          <div className={classes.singleCard_containerIsbn}>{isbn}</div>
           <div className={classes.singleCard_containerTitle}>{title}</div>
+
           <div className={classes.singleCard_containerDescr}>{description}</div>
           <div className={classes.singleCard_containerPublisher}>{publisher}</div>
           {authors.map((author) => (
@@ -68,6 +68,9 @@ const AdminBookCard = ({
           <div>{returnDate}</div>
           <button onClick={onDeleteBookHandler}>delete book</button>
           <button onClick={onUpdateBookHandler}>update book</button>
+          <div id="isbn" className={classes.singleCard_containerIsbn}>
+            {isbn}
+          </div>
         </div>
       </section>
     </>

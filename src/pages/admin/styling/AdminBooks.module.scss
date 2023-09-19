@@ -2,22 +2,22 @@
 	position: relative;
 	margin:auto auto;
 	display:flex;
-
-	margin: auto;
-
-
-
+	flex-direction: column;
 }
+
 .AdminPanel{
-	width:30%;
+	height:30px;
+	width:333px;
 }
-.button_addBook{
-	margin-top: 2rem;
-}
-.AdminBookCard_container{
-	width:70%;
 
+.button_addBook{
+	margin-top: 0;
+}
+
+.AdminBookCard_container{
+	width: auto;
 	display:flex;
 	flex-wrap: wrap;
-	gap:2rem;
+	gap:5rem;
+	margin-top:180px;
 }

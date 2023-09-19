@@ -5,13 +5,22 @@
 	width:30rem;
 	height:6rem;
 	border-bottom:1px solid black;
+	display:flex;
+	flex-direction: column;
+
+}
+.buttonContainer{
+	margin: 2rem auto;
+	color:gray;
+
+
 
 }
 .adminForm{
 	width:15rem;
 	border: 1 px solid black;
 	margin: auto;
-	margin-top:2rem;
+	margin-top:1rem;
 }
 .inputContainer{
 	margin:1rem;
@@ -19,7 +28,34 @@
 .label{
 	visibility:hidden;
 	position:absolute;
-	top:32px;
+	top:134px;
+	left:140px;
+	opacity:.2;
+	color:black;
+
+}
+.label2{
+	visibility:hidden;
+	position:absolute;
+	top:158px;
+	left:140px;
+	opacity:.2;
+	color:black;
+
+}
+.label3{
+	visibility:hidden;
+	position:absolute;
+	top:183px;
+	left:140px;
+	opacity:.2;
+	color:black;
+
+}
+.label4{
+	visibility:hidden;
+	position:absolute;
+	top:158px;
 	left:140px;
 	opacity:.2;
 	color:black;
@@ -28,7 +64,7 @@
 .input::placeholder{
 	position:absolute;
 
-	color:rgb(191, 191, 191);
+	color:rgb(231, 231, 231);
 }
 .input:focus{
 	&::placeholder{
@@ -36,7 +72,25 @@
 
 }
 	.input:focus + .label{
-	transform:translateX(120px);
+	transform:translateX(145px);
+	visibility:visible;
+	transition: 1s all;
+	opacity:.5;
+}
+.input:focus + .label2{
+	transform:translateX(145px);
+	visibility:visible;
+	transition: 1s all;
+	opacity:.5;
+}
+.input:focus + .label3{
+	transform:translateX(122px);
+	visibility:visible;
+	transition: 1s all;
+	opacity:.5;
+}
+.input:focus + .label4{
+	transform:translateX(122px);
 	visibility:visible;
 	transition: 1s all;
 	opacity:.5;

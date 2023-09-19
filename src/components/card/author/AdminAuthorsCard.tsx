@@ -6,6 +6,7 @@ import { authorActions, fetchAuthors } from '../../../redux/slices/authorSlice'
 import UpdateAuthorModal from '../../modals/author/UpdateAuthorModal'
 
 import { deleteAuthor } from '../../../redux/slices/authorSlice'
+import classes from '../style/AdminAuthorsCard.module.scss'
 
 const AdminAuthorsCard: React.FC = ({ authorId, authorName, dateOfBirth, books }) => {
   const dispatch = useDispatch()
@@ -31,14 +32,18 @@ const AdminAuthorsCard: React.FC = ({ authorId, authorName, dateOfBirth, books }
     dispatch(fetchAuthors('api/v1/authors'))
   }, [dispatch])
   return (
-    <div id={authorId} key={authorId}>
-      <div>{authorName}</div>
-      <div>{dateOfBirth}</div>
-      {books != null && books.map((book) => <div key={book.id}>{book.title}</div>)}
-      <button onClick={onDeleteAuthorHandler}>remove</button>
-      <button onClick={openModal}>modify</button>
-      <div>{modalIsVisible && <UpdateAuthorModal exit={closeModal} authorId={chosenAuthor} />}</div>
-    </div>
+    <section className={classes.author_card_container}>
+      <div id={authorId} key={authorId}>
+        <div>{authorName}</div>
+        <div>{dateOfBirth}</div>
+        {books != null && books.map((book) => <div key={book.id}>{book.title}</div>)}
+        <button onClick={onDeleteAuthorHandler}>remove</button>
+        <button onClick={openModal}>modify</button>
+        <div>
+          {modalIsVisible && <UpdateAuthorModal exit={closeModal} authorId={chosenAuthor} />}
+        </div>
+      </div>
+    </section>
   )
 }
 export default AdminAuthorsCard

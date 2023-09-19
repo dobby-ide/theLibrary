@@ -70,28 +70,28 @@ const NewBookModal = ({ closeModal }) => {
   }
   return (
     <div className={classes.newBookModal}>
-      <div>
+      <div className={classes.isbn}>
         <label>ISBN</label>
         <input type="text" name="ISBN" onChange={(e) => textChangeHandler(e)}></input>
       </div>
-      <div>
-        <label>title</label>
+      <div className={classes.title}>
+        <label>Title</label>
         <input type="text" name="title" onChange={(e) => textChangeHandler(e)}></input>
       </div>
-      <div>
-        <label>description</label>
+      <div className={classes.description}>
+        <label>Description</label>
         <input type="text" name="description" onChange={(e) => textChangeHandler(e)}></input>
       </div>
-      <div>
-        <label>publisher</label>
+      <div className={classes.publisher}>
+        <label>Publisher</label>
         <input type="text" name="publisher" onChange={(e) => textChangeHandler(e)}></input>
       </div>
-      <div>
-        <label>year</label>
+      <div className={classes.year}>
+        <label>Year</label>
         <input type="text" name="year" onChange={(e) => textChangeHandler(e)}></input>
       </div>
-      <div>
-        <label>authors</label>
+      <div className={classes.authors}>
+        <label>Authors</label>
         <select name="authors" onChange={(e) => textChangeHandler(e)}>
           <option defaultValue=""></option>
           {authors.map((author) => {
@@ -103,7 +103,9 @@ const NewBookModal = ({ closeModal }) => {
           })}
         </select>
       </div>
-      <button onClick={onSubmitNewBookHandler}>OK</button>
+      <button className={classes.ok_button} onClick={onSubmitNewBookHandler}>
+        OK
+      </button>
     </div>
   )
 }

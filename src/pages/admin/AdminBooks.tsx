@@ -52,12 +52,12 @@ const AdminBooks = () => {
         <div className={classes.button_addBook}>
           <CSSTransition
             in={openModal}
-            timeout={3000}
+            timeout={2000}
             classNames="modalNewBook"
             active
             unmountOnExit>
             <div className="modalNewBook_container">
-              <h2 className="modalF-content__title">new book</h2>
+              <h2 className="modalF-content__title"></h2>
               <NewBookModal closeModal={onClosingModalHandler} />
 
               <button className="modalNewBook_container_button" onClick={toggleModal}>

@@ -125,18 +125,24 @@ export function AuthenticationTitle() {
         sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}>
         {!switchForm ? `Please login` : `Please Register`}
       </Title>
-      <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?
+
+      <div>
         {!switchForm ? (
-          <Anchor size="sm" component="button" onClick={createAccount}>
-            Create account
-          </Anchor>
+          <div>
+            <Text color="dimmed" size="sm" align="center" mt={5}></Text>
+            <Anchor size="sm" component="button" onClick={createAccount}>
+              Create account
+            </Anchor>
+          </div>
         ) : (
-          <Anchor size="sm" component="button" onClick={createAccount}>
-            login?
-          </Anchor>
+          <div>
+            <Text color="dimmed" size="sm" align="center" mt={5}></Text>
+            <Anchor size="sm" component="button" onClick={createAccount}>
+              I want to login
+            </Anchor>
+          </div>
         )}
-      </Text>
+      </div>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <TextInput
